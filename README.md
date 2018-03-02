@@ -1,6 +1,19 @@
 # PythonSnippets
 Collection of python code snippets
 
+### manage file input
+
+    try:
+        with open("file.txt", "r") as file:
+            # Everyting
+            print (file.read())
+
+            # Line by line
+            print (file.readlines()) 
+
+    except IOError:
+        print("File not found")
+
 ### virtual environment python initialisation
     
     virtualenv -p /usr/bin/python3 py3env
