@@ -24,10 +24,10 @@ Collection of python code snippets
     
 ### default setup script for modules
 
-    """Enter name
-        ~~~~~~~~
-        Enter description
-
+    """
+    Enter name
+    ~~~~~~~~
+    Enter description
     """
 
     try:
