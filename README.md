@@ -18,4 +18,4 @@ Collection of python code snippets
 
     configuration = [line for line in read('requirements.txt').split('\n')
                             if line and not line.startswith('#')],
-    print(configuration[0][2])
+    print(configuration)
