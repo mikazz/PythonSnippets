@@ -35,65 +35,30 @@ Collection of python code snippets
                             if line and not line.startswith('#')],
     print(configuration)
     
-### default setup script for modules
+### default setup script for modules / Setup.py
 
-    """
-    Enter name
-    ~~~~~~~~
-    Enter description
-    """
-
-    try:
-        from setuptools import setup, find_packages
-        have_setuptools = True
-    except ImportError:
-        from distutils.core import setup
-        def find_packages(*args, **kwargs):
-            return [
-                'Enter package',
-                'Enter package',
-                'Enter package',
-                'Enter package',
-                'Enter package',
-            ]
-        have_setuptools = False
-
-    if have_setuptools:
-        add_keywords = dict(
-            entry_points = {
-                'console_scripts': ['pygmentize = pygments.cmdline:main'],
-            },
-        )
-    else:
-        add_keywords = dict(
-            scripts = ['pygmentize'],
-        )
-
+    from setuptools import setup
+    import os
+    def read(fname):
+        return open(os.path.join(os.path.dirname(__file__), fname)).read()
     setup(
-        name = 'Enter name',
-        version = 'Enter version',
-        url = 'Enter url',
-        license = 'Enter License',
-        author = 'Enter author',
-        author_email = 'Enter mail',
-        description = 'Enter description',
-        long_description = __doc__,
-        keywords = 'Enter kewords',
-        packages = find_packages(),
-        platforms = 'any',
-        zip_safe = False,
-        include_package_data = True,
-        classifiers = [
-            'License :: OSI Approved :: Enter License',
-            'Intended Audience :: Developers',
-            'Intended Audience :: End Users/Desktop',
-            'Intended Audience :: System Administrators',
-            'Development Status :: 6 - Mature',
-            'Programming Language :: Python',
-            'Programming Language :: Python :: 2',
-            'Programming Language :: Python :: 3',
-            'Operating System :: OS Independent',
-            'Topic :: Utilities',
+        name = "Project Name",
+        version = "0.0.1",
+        author = "Author",
+        author_email = "author@mail.com",
+        description = ("python module"),
+        license = "GPLv2",
+        keywords = "keyword1 keyword2",
+        url = "https://github.com/dantaki/vapeplot/",
+        packages=['vapeplot'],
+        package_dir={'vapeplot':'vapeplot'},
+        long_description=read('README.md'),
+        include_package_data=True,
+        install_requires=['matplotlib'],
+        classifiers=[
+            'Development Status :: 3 - Alpha',
+            'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+            'Topic :: Multimedia :: Graphics',
         ],
-        **add_keywords
     )
+
