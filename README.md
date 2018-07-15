@@ -14,6 +14,14 @@ Collection of python code snippets
     except IOError:
         print("File not found")
 
+### basic bash executing
+    #!/usr/bin/python3
+   
+With Python 3, all strings will be Unicode strings, so the original encoding of the source will have no impact at run-time
+    
+    # -*- coding: utf-8 -*-
+
+
 ### virtual environment python initialisation
     
     virtualenv -p /usr/bin/python3 py3env
