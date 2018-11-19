@@ -136,5 +136,5 @@ Using List Comprehensions
 
 ## Converting an epoch time to a datetime object:
 
-def epoch_to_dt(epoch):
-    return datetime(*gmtime(epoch)[:6])
+    def epoch_to_dt(epoch):
+        return datetime(*gmtime(epoch)[:6])
