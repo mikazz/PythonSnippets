@@ -82,4 +82,9 @@ or
     index: 3, thing: d
     index: 4, thing: e
 
+## Using f-strings (new in Python 3.6)
+
+    things = ["a", "b", "c", "d", "e"]
+    for i, thing in enumerate(things):
+        print(f"index: {i}, thing: {thing}".)
 
