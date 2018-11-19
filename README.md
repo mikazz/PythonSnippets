@@ -76,15 +76,20 @@ or
     for i, thing in enumerate(things):
         print("index: {}, thing: {}".format(i, thing))
 
-    index: 0, thing: a
-    index: 1, thing: b
-    index: 2, thing: c
-    index: 3, thing: d
-    index: 4, thing: e
+    # index: 0, thing: a
+    # index: 1, thing: b
+    # index: 2, thing: c
+    # index: 3, thing: d
+    # index: 4, thing: e
 
 ## Using f-strings (new in Python 3.6)
-
     things = ["a", "b", "c", "d", "e"]
     for i, thing in enumerate(things):
         print(f"index: {i}, thing: {thing}".)
 
+## In this case it's just the regular multiplication operator. In Python you can multiply strings by ints:
+    print( "hello" * 3 )
+    
+## Python can also implicitly convert between bools and ints, where True is 1 and False is 0, making this sort of thing work:
+    print( "hello" * True ) # Prints "hello"
+    print( "hello" * False ) # Prints ""
