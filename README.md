@@ -1,6 +1,24 @@
 # PythonSnippets
 Collection of python code snippets
 
+## Bash getting in the directory where the module is defined
+Put it in your .bashrc or .bash_profile and do cdp <python module name> to get in the directory where the module is defined.:
+
+    cdp () {
+        cd "$(python -c "import os.path as _, ${1}; \
+                print(_.dirname(_.realpath(${1}.__file__[:-1])))"
+            )"
+    }
+
+ This work:
+ 
+     ~ $ cdp os
+    /usr/lib/python2.7 $
+
+    ~ $ cdp os.path
+    /usr/lib/python2.7 $
+
+
 ### manage file input
 
     try:
