@@ -89,6 +89,18 @@ or
         ],
     )
 
+
+## Appending functions to list
+    functions = []
+    for i in range(10):
+        functions.append(lambda i=i: i)
+
+    #print(*functions)
+
+    for f in functions:
+        print(str(f()) + " " + str(f))
+
+
 ## Using enumerate for loops (range) if you need an index
     things = ["a", "b", "c", "d", "e"]
     for i, thing in enumerate(things):
