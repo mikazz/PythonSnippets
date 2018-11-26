@@ -96,6 +96,8 @@ or
 
     def test_answer():
         assert inc(3) == 5
+    
+    print(test_answer())
 
 
 ## Remove char at specific index
