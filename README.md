@@ -90,6 +90,33 @@ or
     )
 
 
+## Assert
+    def inc(x):
+        return x + 1
+
+    def test_answer():
+        assert inc(3) == 5
+
+
+## Remove char at specific index
+    string_to_check = "??blahblah123123123"
+    chars = ["?","a"]
+
+    def remove_at(i, s):
+        """
+            Remove char at specific index
+        """
+        return s[:i] + s[i+1:]
+
+    if string_to_check[0] in chars:
+        new = remove_at(0, string_to_check)
+        print(string_to_check)
+        print(new)
+
+    else:
+        print("Nothing found")
+
+
 ## Appending functions to list
     functions = []
     for i in range(10):
