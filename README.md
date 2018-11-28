@@ -142,6 +142,17 @@ or
     # index: 4, thing: e
 
 
+## Using enumerate to replace
+    given_string = "abcdefghijk"
+    guid = 16 * ["-"]
+    # guid = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+    for i, x in enumerate(given_string):
+        guid[i] = x # or conversion int(x)
+
+    print(guid)
+    # ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', '-', '-', '-', '-', '-']
+
+
 ## Using f-strings (new in Python 3.6)
     things = ["a", "b", "c", "d", "e"]
     for i, thing in enumerate(things):
@@ -155,6 +166,7 @@ or
 ## Python can also implicitly convert between bools and ints, where True is 1 and False is 0, making this sort of thing work:
     print( "hello" * True ) # Prints "hello"
     print( "hello" * False ) # Prints ""
+
 
 ## List Flattening
     nest = [[1, 2], [3, 4], [5, 6]]
@@ -175,13 +187,13 @@ Using List Comprehensions
     >>> [l for n in nest for l in n]
     [1, 2, 3, 4, 5, 6]
 
-## Converting an epoch time to a datetime object:
 
+## Converting an epoch time to a datetime object:
     def epoch_to_dt(epoch):
         return datetime(*gmtime(epoch)[:6])
 
-## Simple class
 
+## Simple class
     class Dog():
         """Represent a dog."""
 
