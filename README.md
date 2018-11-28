@@ -150,7 +150,7 @@ or
         guid[i] = x # or conversion int(x)
 
     print(guid)
-    # ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', '-', '-', '-', '-', '-']
+    # guid = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', '-', '-', '-', '-', '-']
 
 
 ## Using f-strings (new in Python 3.6)
