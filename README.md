@@ -198,7 +198,7 @@ True
 True
 
 
-## Check at least one element of a list matches a condition
+## Check if at least one element of a list matches a condition
     items=[True, True, True, True]
     any(item == False for item in items)
 False
@@ -208,14 +208,7 @@ False
 True
 
 
-## Find all indexes with List Comprehensions
-    items = [True, True, False, False]
-    indexes = [i for i, e in enumerate(items) if e == True]
-    
-[0, 1]
-
-
-## Find all indexes with List Comprehensions    
+## Find all indexes    
     def all_indices(value, list):
         indices = []
         idx = -1
@@ -230,6 +223,12 @@ True
     items = [True, True, False, False]
 
     all_indices(True, items)
+[0, 1]
+
+
+## Find all indexes with List Comprehensions
+    items = [True, True, False, False]
+    indexes = [i for i, e in enumerate(items) if e == True]
 [0, 1]
 
 
