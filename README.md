@@ -187,6 +187,18 @@ Using List Comprehensions
     >>> [l for n in nest for l in n]
     [1, 2, 3, 4, 5, 6]
 
+## Check if all elements of a list matches a condition
+Check at least one element is 0
+
+items=[True, True, True, True]
+any(item == False for item in items)
+False
+
+items=[True, True, True, False]
+any(item == False for item in items)
+True
+
+
 
 ## Converting an epoch time to a datetime object:
     def epoch_to_dt(epoch):
