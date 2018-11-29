@@ -187,6 +187,7 @@ Using List Comprehensions
     >>> [l for n in nest for l in n]
     [1, 2, 3, 4, 5, 6]
 
+
 ## Check if all elements of a list matches a condition
     items = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
     all(item[0] == 1 for item in items)
@@ -198,7 +199,6 @@ True
 
 
 ## Check at least one element of a list matches a condition
-
     items=[True, True, True, True]
     any(item == False for item in items)
 False
@@ -207,6 +207,30 @@ False
     any(item == False for item in items)
 True
 
+
+## Find all indexes with List Comprehensions
+    items = [True, True, False, False]
+    indexes = [i for i, e in enumerate(items) if e == True]
+    
+[0, 1]
+
+
+## Find all indexes with List Comprehensions    
+    def all_indices(value, list):
+        indices = []
+        idx = -1
+        while True:
+            try:
+                idx = list.index(value, idx+1)
+                indices.append(idx)
+            except ValueError:
+                break
+        return indices
+
+    items = [True, True, False, False]
+
+    all_indices(True, items)
+[0, 1]
 
 
 ## Converting an epoch time to a datetime object:
