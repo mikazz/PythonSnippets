@@ -188,14 +188,23 @@ Using List Comprehensions
     [1, 2, 3, 4, 5, 6]
 
 ## Check if all elements of a list matches a condition
-Check at least one element is 0
+    items = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
+    all(item[0] == 1 for item in items)
+True
 
-items=[True, True, True, True]
-any(item == False for item in items)
+    items = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+    all(item == [1,1,1] for item in items)
+True
+
+
+## Check at least one element of a list matches a condition
+
+    items=[True, True, True, True]
+    any(item == False for item in items)
 False
 
-items=[True, True, True, False]
-any(item == False for item in items)
+    items=[True, True, True, False]
+    any(item == False for item in items)
 True
 
 
