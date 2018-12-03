@@ -130,6 +130,12 @@ or
         print(str(f()) + " " + str(f))
 
 
+## Tuples inside list
+    names = [('Anna', 1), ('Jenny', 2)]
+    for (name, id) in names:
+        print(name + " " + str(id))
+
+
 ## Using enumerate for loops (range) if you need an index
     things = ["a", "b", "c", "d", "e"]
     for i, thing in enumerate(things):
