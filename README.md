@@ -142,6 +142,18 @@ or
     # index: 4, thing: e
 
 
+## Dictionary mapping characters
+    normal = u' 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~'
+    wide = u'　０１２３４５６７８９ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ！゛＃＄％＆（）＊＋、ー。／：；〈＝〉？＠［\\］＾＿‘｛｜｝～'
+
+    def vaporize(text):
+        # ord - String to Unicode code point. Example: ord('a') -> int 97
+        widemap = dict((ord(x[0]), x[1]) for x in zip(normal, wide))
+        return text.translate(widemap)
+
+    print(vaporize("aesthetics"))
+
+
 ## Using enumerate to replace
     given_string = "abcdefghijk"
     guid = 16 * ["-"]
