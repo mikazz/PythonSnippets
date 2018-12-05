@@ -43,7 +43,7 @@ or
     # coding: utf8
 
 ### virtual environment python initialisation
-    
+    pip install virtualenv
     virtualenv -p /usr/bin/python3 py3env
     source py3env/bin/activate
     pip install package-name
