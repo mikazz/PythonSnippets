@@ -90,6 +90,9 @@ or
     )
 
 
+# Automate Testing
+
+
 ## Assert
     def inc(x):
         return x + 1
@@ -158,6 +161,18 @@ or
         return text.translate(widemap)
 
     print(vaporize("aesthetics"))
+        
+
+## In this case it's just the regular multiplication operator. In Python you can multiply strings by ints:
+    print( "hello" * 3 )
+
+
+## Python can also implicitly convert between bools and ints, where True is 1 and False is 0, making this sort of thing work:
+    print( "hello" * True ) # Prints "hello"
+    print( "hello" * False ) # Prints ""
+
+
+# Lists
 
 
 ## Using enumerate to replace
@@ -175,15 +190,6 @@ or
     things = ["a", "b", "c", "d", "e"]
     for i, thing in enumerate(things):
         print(f"index: {i}, thing: {thing}".)
-        
-
-## In this case it's just the regular multiplication operator. In Python you can multiply strings by ints:
-    print( "hello" * 3 )
-
-
-## Python can also implicitly convert between bools and ints, where True is 1 and False is 0, making this sort of thing work:
-    print( "hello" * True ) # Prints "hello"
-    print( "hello" * False ) # Prints ""
 
 
 ## List Flattening
@@ -255,6 +261,9 @@ True
         return datetime(*gmtime(epoch)[:6])
 
 
+# Classes
+
+
 ## Simple class
     class Dog():
         """Represent a dog."""
@@ -275,6 +284,7 @@ True
 
 # Recursion
 
+
 ## Reverse String
     def reverse(s):
         if len(s) == 0:
@@ -291,8 +301,6 @@ reverse('llo') calls reverse('lo') and then adds the 'l',
 reverse('lo') calls reverse('o') and then adds the 'l',
 reverse('o') calls reverse('') and then adds the 'o',
 reverse('') returns '' because len('') == 0.
-
-
 
 
 # SYS Library
