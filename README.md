@@ -272,3 +272,54 @@ True
     print(my_dog.name + " is a great dog!")
     my_dog.sit()
 
+
+## SYS Counter
+    import time
+    import sys
+
+    counter = 0
+    Done = False
+
+    while not Done:
+        #print(counter)
+        sys.stdout.write("\r " + str(counter))
+        sys.stdout.flush()
+        counter +=1
+        if counter == 10:
+            Done = True
+        time.sleep(1) # each one sec
+
+
+## SYS Progess Bar
+    import time
+    import sys
+
+    toolbar_width = 40
+
+    # setup toolbar
+    sys.stdout.write("[%s]" % (" " * toolbar_width))
+    sys.stdout.flush()
+    sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
+
+    for i in xrange(toolbar_width):
+        time.sleep(0.1) # do real work here
+        # update the bar
+        sys.stdout.write("-")
+        sys.stdout.flush()
+
+
+## SYS Spinning (rotating) Cursor
+    import time
+    import sys
+
+    def spinning_cursor():
+        while True:
+            for cursor in '|/-\\':
+                yield cursor
+
+    spinner = spinning_cursor()
+    for _ in range(50):
+        sys.stdout.write(next(spinner))
+        sys.stdout.flush()
+        time.sleep(0.1)
+        sys.stdout.write('\r')
