@@ -290,7 +290,7 @@ True
         time.sleep(1) # each one sec
 
 
-## SYS Progess Bar
+## SYS Progress Bar
     import time
     import sys
 
