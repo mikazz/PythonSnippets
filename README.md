@@ -337,7 +337,7 @@ reverse('') returns '' because len('') == 0.
     for i in xrange(toolbar_width):
         time.sleep(0.1) # do real work here
         # update the bar
-        sys.stdout.write("-")
+        sys.stdout.write("-") # try: (u"█")
         sys.stdout.flush()
 
 
