@@ -273,6 +273,31 @@ True
     my_dog.sit()
 
 
+# Recursion
+
+## Reverse String
+    def reverse(s):
+        if len(s) == 0:
+            return s
+        else:
+            return reverse(s[1:]) + s[0]
+    s = "Hello"
+    print(reverse(s))
+
+Notice that it's not just s[1:] + s[0], it's reverse(s[1:]) + s[0]. That means:
+reverse('hello') calls reverse('ello') and then adds the 'h',
+reverse('ello') calls reverse('llo') and then adds the 'e',
+reverse('llo') calls reverse('lo') and then adds the 'l',
+reverse('lo') calls reverse('o') and then adds the 'l',
+reverse('o') calls reverse('') and then adds the 'o',
+reverse('') returns '' because len('') == 0.
+
+
+
+
+# SYS Library
+
+
 ## SYS Counter
     import time
     import sys
