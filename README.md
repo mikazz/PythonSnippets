@@ -356,3 +356,35 @@ reverse('') returns '' because len('') == 0.
         sys.stdout.flush()
         time.sleep(0.1)
         sys.stdout.write('\r')
+
+# Threading
+
+## Manage multiple threads
+
+    import threading
+    import time
+
+    def sleeper_thread(seconds, name):
+        print('{}: Hi, I am {}. Going to sleep for {} seconds \n'.format(name, name, seconds))
+        time.sleep(seconds)
+
+        print('{}: I just woke up \n'.format(name))
+        print('{}: hello'.format(name))
+        print('{}: what is going on'.format(name))
+        print('---------------------------------- \n')
+
+    t1 = threading.Thread(target = sleeper_thread, name = 'thread1', args = (10, 'thread1') )
+    t2 = threading.Thread(target = sleeper_thread, name = 'thread2', args = (15, 'thread2') )
+
+    t1.start() # Start the thread’s activity
+    print('{} is alive \n'.format(t1))
+    t2.start() # Start the thread’s activity
+    print('{} is alive \n'.format(t2))
+
+    t1.join() # Wait until the thread terminates
+    print('{} died'.format(t1))
+    t2.join() # Wait until the thread terminates
+    print('{} died'.format(t2))
+
+
+
