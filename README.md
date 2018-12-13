@@ -174,6 +174,30 @@ or
 
 # Lists
 
+## Insert Into The Beginning Of A List In Python
+    list.insert(0, value)
+
+## Insert Into The End Of A List In Python
+    list.append(value)
+
+## Insert Into An Existing Index Of A Python List
+    list[index] = value
+
+## Concatenating Two Python Lists
+    list_a += list_b
+
+## "List Index Out Of Range" Error
+    def my_function(list):
+        try:
+            third_value = list[2]
+        except IndexError:
+            print(f'list has only {len(list)} elements')
+            raise
+
+    my_function([1,2])
+list has only 2 elements
+IndexError: list index out of range
+
 
 ## Using enumerate to replace
     given_string = "abcdefghijk"
