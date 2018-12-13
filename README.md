@@ -274,6 +274,12 @@ True
 [0, 1]
 
 
+## Apply A Function To A List with List Comprehensions
+    original_list = [1,2,3,4,5]
+    double_list = [element * 2 for element in original_list]
+[2, 4, 6, 8, 10]
+
+
 ## Find all indexes with List Comprehensions
     items = [True, True, False, False]
     indexes = [i for i, e in enumerate(items) if e == True]
