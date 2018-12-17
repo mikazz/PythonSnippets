@@ -353,6 +353,23 @@ reverse('') returns '' because len('') == 0.
         time.sleep(1) # each one sec
 
 
+## SYS Measuring elapsed time / timer
+    import time
+    import sys
+
+    counter = 0
+    Done = False
+
+    start_time = time.time()
+    while not Done:
+        #print(counter)
+        elapsed_time = time.time() - start_time
+
+        sys.stdout.write("\r " + "Elapsed time: " + str(time.strftime("%H:%M:%S", time.gmtime(elapsed_time))))
+        sys.stdout.flush()
+        time.sleep(1)
+
+
 ## SYS Progress Bar
     import time
     import sys
