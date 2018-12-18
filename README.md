@@ -280,6 +280,19 @@ True
 [2, 4, 6, 8, 10]
 
 
+# Apply A Function To A List under condition (equals 0) with List Comprehensions
+    def is_zero(arg):
+        if arg is 0:
+            return True
+        else:
+            return False
+
+    lines = [0, 0, 1, 0, 0, 1]
+    visible = [line + 10 for line in lines if is_zero(line)]
+    print(visible)
+[10, 10, 10, 10]
+
+
 ## Find all indexes with List Comprehensions
     items = [True, True, False, False]
     indexes = [i for i, e in enumerate(items) if e == True]
