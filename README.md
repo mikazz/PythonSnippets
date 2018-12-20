@@ -113,6 +113,7 @@ or
     
     print(test_answer())
 
+
 ## Try, Except, Finally - error handling
     x = 0
     try:
@@ -124,6 +125,42 @@ or
     finally:
         x = 1
         print(1/x)
+
+
+# Dictionaries
+
+
+## Looping over dictionary keys
+
+    # key : value
+    database = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
+
+    for key in database.keys():
+        if key.startswith('r'):
+            del database[key]
+
+    for key in database:
+        print(key)
+
+
+## Looping over dictionary keys and values
+
+    for key, value in database.items():
+        print(key + " ---> " + value)
+
+or
+
+    for key in database:
+        print(key + " ---> " + database[key])
+
+
+## Construct a dictionary from pairs / two lists
+
+    names = ['0. Cory', '1. Trevor', '2. Ray', '3. Ricky']
+    colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
+
+    database = dict(zip(names, colors))
+    print(database)
 
 
 ## Dictionary mapping characters
@@ -160,17 +197,22 @@ or
 
 # Lists
 
+
 ## Insert Into The Beginning Of A List In Python
     list.insert(0, value)
+
 
 ## Insert Into The End Of A List In Python
     list.append(value)
 
+
 ## Insert Into An Existing Index Of A Python List
     list[index] = value
 
+
 ## Concatenating Two Python Lists
     list_a += list_b
+
 
 ## "List Index Out Of Range" Error
     def my_function(list):
@@ -183,6 +225,37 @@ or
     my_function([1,2])
 list has only 2 elements
 IndexError: list index out of range
+
+
+## Looping over over List: two collections
+
+    names = ['0. Cory', '1. Trevor', '2. Ray', '3. Ricky']
+    colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
+
+    for name, color in zip(names, colors):
+        print (name + " ---> " + color ) 
+
+
+## Looping over List in sorted order
+
+    colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
+    for color in sorted(colors):
+        print(color)
+
+    for color in sorted(colors, reverse=True):
+        print(color)
+
+
+## Custom sort order
+    colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
+    def compare_length(c1, c2):
+        if len(c1) < len(c2):
+            return -1
+        if len(c1) > len(c2):
+            return 1
+        return 0
+
+    print(sorted(colors, cmp=compare_length))
 
 
 ## Remove char at specific index
