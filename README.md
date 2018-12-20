@@ -136,7 +136,18 @@ or
         return text.translate(widemap)
 
     print(vaporize("aesthetics"))
-        
+
+
+## Split phrase into words
+    PHRASE = "Would you like to know more?"
+    num_words = len(PHRASE.split(" "))
+    print("There are {:} words in {:}".format(num_words, PHRASE))
+
+or
+
+    PHRASE = "Would you like to know more?"
+    print("There are %s words in %s" % (PHRASE.count(' ') + 1, PHRASE))
+
 
 ## In this case it's just the regular multiplication operator. In Python you can multiply strings by ints:
     print( "hello" * 3 )
