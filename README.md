@@ -32,6 +32,16 @@ Put it in your .bashrc or .bash_profile and do cdp <python module name> to get i
     except IOError:
         print("File not found")
 
+### Manage file input with OS
+
+    import os
+
+    def read(fname):
+        return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+    print(read("C:\Users\username\Desktop\README.txt"))
+
+
 ### basic bash executing
     #!/usr/bin/python3
    
@@ -42,14 +52,14 @@ or
 
     # coding: utf8
 
-### virtual environment python initialisation
-    pip install virtualenv
+
+### Virtual environment python initialisation
     virtualenv -p /usr/bin/python3 py3env
     source py3env/bin/activate
     pip install package-name
     
-### configuration file for your project app
-
+    
+### Configuration file for your project app
     import os
 
     def read(fname):
@@ -62,8 +72,8 @@ or
                             if line and not line.startswith('#')],
     print(configuration)
     
-### default setup script for modules / Setup.py
-
+    
+### Default setup script for modules / Setup.py
     from setuptools import setup
     import os
     def read(fname):
@@ -76,9 +86,10 @@ or
         description = ("python module"),
         license = "GPLv2",
         keywords = "keyword1 keyword2",
-        url = "https://github.com/dantaki/vapeplot/",
+        url = "www.project.com",
         packages=['vapeplot'],
         package_dir={'vapeplot':'vapeplot'},
+        
         long_description=read('README.md'),
         include_package_data=True,
         install_requires=['matplotlib'],
@@ -102,53 +113,17 @@ or
     
     print(test_answer())
 
+## Try, Except, Finally - error handling
+    x = 0
+    try:
+        print(1/x)
 
-## Remove char at specific index
-    string_to_check = "??blahblah123123123"
-    chars = ["?","a"]
+    except Exception as e:
+        print("Error: " + str(e))
 
-    def remove_at(i, s):
-        """
-            Remove char at specific index
-        """
-        return s[:i] + s[i+1:]
-
-    if string_to_check[0] in chars:
-        new = remove_at(0, string_to_check)
-        print(string_to_check)
-        print(new)
-
-    else:
-        print("Nothing found")
-
-
-## Appending functions to list
-    functions = []
-    for i in range(10):
-        functions.append(lambda i=i: i)
-
-    #print(*functions)
-
-    for f in functions:
-        print(str(f()) + " " + str(f))
-
-
-## Tuples inside list
-    names = [('Anna', 1), ('Jenny', 2)]
-    for (name, id) in names:
-        print(name + " " + str(id))
-
-
-## Using enumerate for loops (range) if you need an index
-    things = ["a", "b", "c", "d", "e"]
-    for i, thing in enumerate(things):
-        print("index: {}, thing: {}".format(i, thing))
-
-    # index: 0, thing: a
-    # index: 1, thing: b
-    # index: 2, thing: c
-    # index: 3, thing: d
-    # index: 4, thing: e
+    finally:
+        x = 1
+        print(1/x)
 
 
 ## Dictionary mapping characters
@@ -197,6 +172,54 @@ or
     my_function([1,2])
 list has only 2 elements
 IndexError: list index out of range
+
+
+## Remove char at specific index
+    string_to_check = "??blahblah123123123"
+    chars = ["?","a"]
+
+    def remove_at(i, s):
+        """
+            Remove char at specific index
+        """
+        return s[:i] + s[i+1:]
+
+    if string_to_check[0] in chars:
+        new = remove_at(0, string_to_check)
+        print(string_to_check)
+        print(new)
+
+    else:
+        print("Nothing found")
+
+
+## Appending functions to list
+    functions = []
+    for i in range(10):
+        functions.append(lambda i=i: i)
+
+    #print(*functions)
+
+    for f in functions:
+        print(str(f()) + " " + str(f))
+
+
+## Tuples inside list
+    names = [('Anna', 1), ('Jenny', 2)]
+    for (name, id) in names:
+        print(name + " " + str(id))
+
+
+## Using enumerate for loops (range) if you need an index
+    things = ["a", "b", "c", "d", "e"]
+    for i, thing in enumerate(things):
+        print("index: {}, thing: {}".format(i, thing))
+
+    # index: 0, thing: a
+    # index: 1, thing: b
+    # index: 2, thing: c
+    # index: 3, thing: d
+    # index: 4, thing: e
 
 
 ## Using enumerate to replace
