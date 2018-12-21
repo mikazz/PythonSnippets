@@ -597,7 +597,7 @@ Server
         print(data)
 
 
-## Simple ECHO TCP Multi Client - Server
+## Simple TCP Multithread Echo Client - Server
 Client
     
     import socket
