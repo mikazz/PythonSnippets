@@ -565,4 +565,33 @@ reverse('') returns '' because len('') == 0.
     print('{} died'.format(t2))
 
 
+# Socket
+
+
+## Simple UDP Client
+    import socket
+
+    port = 1337
+    host = '127.0.0.1'
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect((host, port))
+
+    s.send('Hello World 1')
+    s.send('Hello World 2')
+    s.send('Hello World 3')
+
+
+## Simple UDP Server
+    import socket
+
+    port = 1337
+    host = '127.0.0.1'
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.bind((host, port))
+
+    print("Waiting on port: " +  str(port))
+    while True:
+        data, addr = s.recvfrom(1024)
+        print(data)
 
