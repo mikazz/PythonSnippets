@@ -568,7 +568,9 @@ reverse('') returns '' because len('') == 0.
 # Socket
 
 
-## Simple UDP Client
+## Simple UDP Client - Server
+Client
+
     import socket
 
     port = 1337
@@ -580,8 +582,8 @@ reverse('') returns '' because len('') == 0.
     s.send('Hello World 2')
     s.send('Hello World 3')
 
+Server
 
-## Simple UDP Server
     import socket
 
     port = 1337
@@ -594,4 +596,5 @@ reverse('') returns '' because len('') == 0.
     while True:
         data, addr = s.recvfrom(1024)
         print(data)
+
 
