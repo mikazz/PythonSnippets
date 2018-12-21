@@ -575,7 +575,7 @@ Client
 
     port = 1337
     host = '127.0.0.1'
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
     s.connect((host, port))
 
     s.send('Hello World 1')
@@ -589,7 +589,7 @@ Server
     port = 1337
     host = '127.0.0.1'
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
     s.bind((host, port))
 
     print("Waiting on port: " +  str(port))
