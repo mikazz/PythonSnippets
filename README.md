@@ -573,9 +573,9 @@ Client
     import socket
 
     port = 1337
-    host = '127.0.0.1'
+    hostname = '127.0.0.1'
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
-    s.connect((host, port))
+    s.connect((hostname, port))
 
     s.send('Hello World 1')
     s.send('Hello World 2')
@@ -586,10 +586,10 @@ Server
     import socket
 
     port = 1337
-    host = '127.0.0.1'
+    hostname = '127.0.0.1'
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
-    s.bind((host, port))
+    s.bind((hostname, port))
 
     print("Waiting on port: " +  str(port))
     while True:
@@ -597,3 +597,61 @@ Server
         print(data)
 
 
+## Simple ECHO TCP Multi Client - Server
+Client
+    
+    import socket
+
+    hostname = "127.0.0.1"
+    port = 1337
+
+    # Create an ipv4 (AF_INET) socket object using the tcp protocol (SOCK_STREAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    s.connect((hostname, port))
+
+    s.send('Hello World Echo')
+
+    # 4096 is recommended buffer size
+    response = s.recv(4096)
+
+    print(response)
+
+Server
+
+    from socket import *
+    import thread
+
+    BUFF = 1024
+    HOST = '127.0.0.1'
+    PORT = 9999
+
+    def response(key):
+        return 'Server response: ' + key
+
+    def handler(s_client,addr):
+        while True:
+            data = s_client.recv(BUFF)
+            if not data: break
+
+            print repr(addr) + ' recv:' + repr(data)
+            s_client.send(response(data))
+
+            print repr(addr) + ' sent:' + repr(response(data))
+
+            if "close" == data.rstrip(): break # type 'close' on client console to close connection from the server side
+
+        s_client.close()
+        print(str(addr) + "- closed connection")
+
+    if __name__=='__main__':
+        ADDR = (HOST, PORT)
+        s_server = socket(AF_INET, SOCK_STREAM)
+        s_server.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+        s_server.bind(ADDR)
+        s_server.listen(5)
+        while True:
+            print('Waiting for connection... listening on port: ' + str(PORT))
+            s_client, addr = s_server.accept()
+            print('...connected from: ' + str(addr))
+            thread.start_new_thread(handler, (s_client, addr))
