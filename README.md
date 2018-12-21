@@ -295,22 +295,21 @@ IndexError: list index out of range
 
 
 ## Using enumerate for loops (range) if you need an index
-    things = ["a", "b", "c", "d", "e"]
-    for i, thing in enumerate(things):
-        print("index: {}, thing: {}".format(i, thing))
-
-    # index: 0, thing: a
-    # index: 1, thing: b
-    # index: 2, thing: c
-    # index: 3, thing: d
-    # index: 4, thing: e
+    list = ["a", "b", "c", "d", "e"]
+    for index, element in enumerate(list):
+        print("index: {}, element: {}".format(index, element))
+index: 0, element: a
+index: 1, element: b
+index: 2, element: c
+index: 3, element: d
+index: 4, element: e
 
 
 ## Using enumerate to replace
-    given_string = "abcdefghijk"
+    string = "abcdefghijk"
     guid = 16 * ["-"]
     # guid = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
-    for i, x in enumerate(given_string):
+    for i, x in enumerate(string):
         guid[i] = x # or conversion int(x)
 
     print(guid)
