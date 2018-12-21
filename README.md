@@ -101,6 +101,15 @@ or
     )
 
 
+# Script Writing
+
+
+## Verbose Mode
+    verbose = True
+    vprint = print if verbose else lambda *a, **k: None
+    vprint("hello world")
+
+
 # Automate Testing
 
 
