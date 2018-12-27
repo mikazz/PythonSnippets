@@ -664,3 +664,28 @@ Server
             s_client, addr = s_server.accept()
             print('...connected from: ' + str(addr))
             thread.start_new_thread(handler, (s_client, addr))
+
+# Selenium
+
+    #!/usr/bin/python3
+
+    from selenium import webdriver
+    import os
+
+    #driver loc on disk
+    abs_driver = os.path.abspath('/driver/chromedriver')
+    ChromeDriverPath = abs_driver
+
+    option = webdriver.ChromeOptions()
+    ##option.add_argument("-incognito")
+    ##option.add_argument("--start-maximized")
+    driver = webdriver.Chrome(executable_path=ChromeDriverPath, chrome_options=option)
+
+    driver.set_window_size(1500, 950)
+
+    driver.get("https://www.site.com/user/login")
+
+    html_addres = driver.current_url
+
+print(html_addres)
+
