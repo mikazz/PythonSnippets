@@ -161,6 +161,29 @@ or
         print(1/x)
 
 
+# Strings
+
+
+## Split phrase into words
+    PHRASE = "Would you like to know more?"
+    num_words = len(PHRASE.split(" "))
+    print("There are {:} words in {:}".format(num_words, PHRASE))
+
+or
+
+    PHRASE = "Would you like to know more?"
+    print("There are %s words in %s" % (PHRASE.count(' ') + 1, PHRASE))
+
+
+## In this case it's just the regular multiplication operator. In Python you can multiply strings by ints:
+    print( "hello" * 3 )
+
+
+## Python can also implicitly convert between bools and ints, where True is 1 and False is 0, making this sort of thing work:
+    print( "hello" * True ) # Prints "hello"
+    print( "hello" * False ) # Prints ""
+
+
 # Dictionaries
 
 
@@ -207,26 +230,6 @@ or
         return text.translate(widemap)
 
     print(vaporize("aesthetics"))
-
-
-## Split phrase into words
-    PHRASE = "Would you like to know more?"
-    num_words = len(PHRASE.split(" "))
-    print("There are {:} words in {:}".format(num_words, PHRASE))
-
-or
-
-    PHRASE = "Would you like to know more?"
-    print("There are %s words in %s" % (PHRASE.count(' ') + 1, PHRASE))
-
-
-## In this case it's just the regular multiplication operator. In Python you can multiply strings by ints:
-    print( "hello" * 3 )
-
-
-## Python can also implicitly convert between bools and ints, where True is 1 and False is 0, making this sort of thing work:
-    print( "hello" * True ) # Prints "hello"
-    print( "hello" * False ) # Prints ""
 
 
 # Lists
@@ -439,7 +442,10 @@ True
 [0, 1]
 
 
-# *ARGS
+# Functions
+
+
+## *ARGS
     def AVG(*wages):
         i = 0
         sum = 0.0
@@ -452,11 +458,6 @@ True
         print(sum/i)
 
     AVG(1,2,3)
-
-
-## Converting an epoch time to a datetime object:
-    def epoch_to_dt(epoch):
-        return datetime(*gmtime(epoch)[:6])
 
 
 # Classes
@@ -499,6 +500,14 @@ reverse('llo') calls reverse('lo') and then adds the 'l',
 reverse('lo') calls reverse('o') and then adds the 'l',
 reverse('o') calls reverse('') and then adds the 'o',
 reverse('') returns '' because len('') == 0.
+
+
+# Time
+
+
+## Converting an epoch time to a datetime object:
+    def epoch_to_dt(epoch):
+        return datetime(*gmtime(epoch)[:6])
 
 
 # SYS Library
