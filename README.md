@@ -19,7 +19,7 @@ Put it in your .bashrc or .bash_profile and do cdp <python module name> to get i
     /usr/lib/python2.7 $
 
 
-### manage file input
+## Manage file input
 
     try:
         with open("file.txt", "r") as file:
@@ -32,7 +32,7 @@ Put it in your .bashrc or .bash_profile and do cdp <python module name> to get i
     except IOError:
         print("File not found")
 
-### Manage file input with OS
+## Manage file input with OS
 
     import os
 
@@ -42,7 +42,27 @@ Put it in your .bashrc or .bash_profile and do cdp <python module name> to get i
     print(read("C:\Users\username\Desktop\README.txt"))
 
 
-### basic bash executing
+## Recursive directory walk
+    import os
+
+    source = '/home/mike/Desktop/PYTHON/NAMED_RECOG/data'
+
+    for root, dirs, filenames in os.walk(source):
+        for f in filenames:
+            #print (f)
+            fullpath = os.path.join(source, f)
+            log = open(fullpath, 'r')
+
+            try:
+                with open(fullpath, "r") as file:
+                    raw = file.read()
+                    print(raw)
+
+            except IOError:
+                print("File not found")
+
+
+## Basic bash executing
     #!/usr/bin/python3
    
 With Python 3, all strings will be Unicode strings, so the original encoding of the source will have no impact at run-time
@@ -543,7 +563,9 @@ reverse('') returns '' because len('') == 0.
         time.sleep(0.1)
         sys.stdout.write('\r')
 
+
 # Threading
+
 
 ## Manage multiple threads
 
@@ -686,6 +708,5 @@ Server
     driver.get("https://www.site.com/user/login")
 
     html_addres = driver.current_url
-
-print(html_addres)
+    print(html_addres)
 
