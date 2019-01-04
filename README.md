@@ -513,6 +513,18 @@ reverse('') returns '' because len('') == 0.
 # SYS Library
 
 
+## SYS argv
+    import sys
+
+    first_argument = sys.argv[1]
+    second_argument = sys.argv[2]
+
+    print(first_argument)
+    print(second_argument)
+
+python argv.py a b
+
+
 ## SYS Counter
     import time
     import sys
