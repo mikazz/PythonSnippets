@@ -643,11 +643,12 @@ python argv.py a b
 Client
 
     import socket
-
-    port = 1337
-    hostname = '127.0.0.1'
+    
+    HOST = '127.0.0.1'
+    PORT = 1337
+ 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
-    s.connect((hostname, port))
+    s.connect((HOST, PORT))
 
     s.send('Hello World 1')
     s.send('Hello World 2')
@@ -657,16 +658,76 @@ Server
 
     import socket
 
-    port = 1337
-    hostname = '127.0.0.1'
+    HOST = '127.0.0.1'
+    PORT = 1337
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
-    s.bind((hostname, port))
+    s.bind((HOST, PORT))
 
-    print("Waiting on port: " +  str(port))
+    print("Waiting on port: " +  str(PORT))
     while True:
         data, addr = s.recvfrom(1024)
         print(data)
+
+
+## Send file via UDP
+Sender
+
+    import socket
+    import sys
+
+    HOST = '127.0.0.1'
+    PORT = 9999
+    BUFF = 1024
+    file_name = 'test.txt'
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    addr = (HOST, PORT)
+
+
+    s.sendto(file_name, addr)
+
+    f = open(file_name,"rb")
+    data = f.read(BUFF)
+    while (data):
+        if(s.sendto(data, addr)):
+            print("Sending ...")
+            data = f.read(BUFF)
+    s.close()
+    f.close()
+
+Receiver
+
+    import socket
+    import select
+
+    HOST = '127.0.0.1'
+    PORT = 9999
+    BUFF = 1024
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.bind((HOST, PORT))
+
+    addr = (HOST, PORT)
+
+    data,addr = s.recvfrom(BUFF)
+    print("Received File: " + data.strip())
+    f = open(data.strip(), 'wb')
+
+    data, addr = s.recvfrom(BUFF)
+
+    try:
+        while(data):
+            f.write(data)
+            s.settimeout(2)
+            data, addr = s.recvfrom(BUFF)
+
+    except socket.timeout:
+        f.close()
+        s.close()
+        print("File Downloaded")
+
+
 
 
 ## Simple TCP Multithread Echo Client - Server
@@ -674,13 +735,13 @@ Client
     
     import socket
 
-    hostname = "127.0.0.1"
-    port = 1337
+    HOST = "127.0.0.1"
+    PORT = 1337
 
     # Create an ipv4 (AF_INET) socket object using the tcp protocol (SOCK_STREAM)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    s.connect((hostname, port))
+    s.connect((HOST, PORT))
 
     s.send('Hello World Echo')
 
@@ -694,10 +755,10 @@ Server
     from socket import *
     import thread
 
-    BUFF = 1024
     HOST = '127.0.0.1'
     PORT = 9999
-
+    BUFF = 1024
+    
     def response(key):
         return 'Server response: ' + key
 
