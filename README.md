@@ -83,7 +83,6 @@ or
 
 
 ## Manage file input
-
     try:
         with open("file.txt", "r") as file:
             # Everyting
@@ -97,7 +96,6 @@ or
 
 
 ## Manage file input with OS
-
     import os
 
     def read(fname):
@@ -188,7 +186,6 @@ or
 
 
 ## Looping over dictionary keys
-
     # key : value
     database = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
 
@@ -508,6 +505,23 @@ reverse('') returns '' because len('') == 0.
 ## Converting an epoch time to a datetime object:
     def epoch_to_dt(epoch):
         return datetime(*gmtime(epoch)[:6])
+
+
+## Converting an epoch time to a readable format:
+    print(str(time.strftime("%H:%M:%S", time.gmtime(1546599577) )))
+10:59:37
+
+    print(str(time.strftime("%I:%M %p", time.gmtime(1546599577) )))
+10:59 AM
+
+    print(str(time.strftime("%d-%m-%Y %H:%M:%S", time.gmtime(1546599577) )))
+04-01-2019 10:59:37
+
+    print(str(time.strftime("%A %d-%m-%Y %H:%M:%S", time.gmtime(1546599577) )))
+Friday 04-01-2019 10:59:37
+
+    print( datetime.datetime.fromtimestamp(float(1546599577099)/1000).strftime('%Y-%m-%d %H:%M:%S.%f') )
+2019-01-04 11:59:37.099000
 
 
 # SYS Library
