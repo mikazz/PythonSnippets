@@ -672,7 +672,7 @@ Server
 
     import socket
 
-    HOST = '127.0.0.1'
+    HOST = '127.0.0.1' # 0.0.0.0 - listen on all network cards
     PORT = 1337
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
@@ -682,6 +682,7 @@ Server
     while True:
         data, addr = s.recvfrom(1024)
         print(data)
+        print(addr) # client PORT and HOST
 
 
 ## Send file via UDP
