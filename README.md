@@ -699,7 +699,6 @@ Sender
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     addr = (HOST, PORT)
 
-
     s.sendto(file_name, addr)
 
     f = open(file_name,"rb")
@@ -723,9 +722,6 @@ Receiver
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind((HOST, PORT))
 
-    addr = (HOST, PORT)
-
-    data,addr = s.recvfrom(BUFF)
     print("Received File: " + data.strip())
     f = open(data.strip(), 'wb')
 
@@ -741,8 +737,6 @@ Receiver
         f.close()
         s.close()
         print("File Downloaded")
-
-
 
 
 ## Simple TCP Multithread Echo Client - Server
