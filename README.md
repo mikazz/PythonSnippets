@@ -713,35 +713,102 @@ Sender
 Receiver
 
     import socket
-    import sys
     import select
 
-    HOST = '127.0.0.1'
-    PORT = 9999
+    HOST = "127.0.0.1" #  UDP_IP
+    PORT = 5005 #  IN_PORT 
+    timeout = 3
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.bind((HOST, PORT))
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind((HOST, PORT))
 
-    addr = (HOST, PORT)
-    BUFF=1024
+    while True:
+        data, addr = sock.recvfrom(1024)
+        if data:
+            print "File name:", data
+            file_name = data.strip()
 
-    data,addr = s.recvfrom(BUFF)
+        f = open(file_name, 'wb')
 
-    print "Received File:", data.strip()
-    f = open(data.strip(),'wb')
+        while True:
+            ready = select.select([sock], [], [], timeout)
+            if ready[0]:
+                data, addr = sock.recvfrom(1024)
+                f.write(data)
+            else:
+                print "%s Finish!" % file_name
+                f.close()
+                break
 
-    data,addr = s.recvfrom(BUFF)
+## Send File via TCP
+Sender
+
+    import socket
+    import sys
+
+    TCP_IP = "127.0.0.1"
+    FILE_PORT = 5005
+    DATA_PORT = 5006
+    buf = 1024
+    file_name = sys.argv[1]
+
+
     try:
-        while(data):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((TCP_IP, FILE_PORT))
+        sock.send(file_name)
+        sock.close()
+
+        print "Sending %s ..." % file_name
+
+        f = open(file_name, "rb")
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((TCP_IP, DATA_PORT))
+        data = f.read()
+        sock.send(data)
+
+    finally:
+        sock.close()
+    f.close()
+
+Receiver
+
+    import socket
+
+    TCP_IP = "127.0.0.1"
+    FILE_PORT = 5005
+    DATA_PORT = 5006
+    timeout = 3
+    buf = 1024
+
+
+    sock_f = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock_f.bind((TCP_IP, FILE_PORT))
+    sock_f.listen(1)
+
+    sock_d = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock_d.bind((TCP_IP, DATA_PORT))
+    sock_d.listen(1)
+
+
+    while True:
+        conn, addr = sock_f.accept()
+        data = conn.recv(buf)
+        if data:
+            print "File name:", data
+            file_name = data.strip()
+
+        f = open(file_name, 'wb')
+
+        conn, addr = sock_d.accept()
+        while True:
+            data = conn.recv(buf)
+            if not data:
+                break
             f.write(data)
-            s.settimeout(2)
-            data,addr = s.recvfrom(BUFF)
-    except socket.timeout:
+
+        print "%s Finish!" % file_name
         f.close()
-        s.close()
-        print "File Downloaded"
-
-
 
 
 ## Simple TCP Multithread Echo Client - Server
