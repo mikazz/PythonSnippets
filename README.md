@@ -128,9 +128,25 @@ or
 
 
 ## Verbose Mode
+
+Python 2.x
+    
+    if verbose:
+        def verboseprint(*args):
+            # Print each argument separately so caller doesn't need to
+            # stuff everything to be printed into a single string
+            for arg in args:
+               print arg,
+            print
+    else:   
+        verboseprint = lambda *a: None      # do-nothing function
+        
+Python 3.x
+    
     verbose = True
     vprint = print if verbose else lambda *a, **k: None
     vprint("hello world")
+
 
 
 # Automate Testing
