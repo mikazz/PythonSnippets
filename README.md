@@ -713,30 +713,35 @@ Sender
 Receiver
 
     import socket
+    import sys
     import select
 
     HOST = '127.0.0.1'
     PORT = 9999
-    BUFF = 1024
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind((HOST, PORT))
 
-    print("Received File: " + data.strip())
-    f = open(data.strip(), 'wb')
+    addr = (HOST, PORT)
+    BUFF=1024
 
-    data, addr = s.recvfrom(BUFF)
+    data,addr = s.recvfrom(BUFF)
 
+    print "Received File:", data.strip()
+    f = open(data.strip(),'wb')
+
+    data,addr = s.recvfrom(BUFF)
     try:
         while(data):
             f.write(data)
             s.settimeout(2)
-            data, addr = s.recvfrom(BUFF)
-
+            data,addr = s.recvfrom(BUFF)
     except socket.timeout:
         f.close()
         s.close()
-        print("File Downloaded")
+        print "File Downloaded"
+
+
 
 
 ## Simple TCP Multithread Echo Client - Server
