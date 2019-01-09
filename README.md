@@ -245,6 +245,49 @@ or
     print(vaporize("aesthetics"))
 
 
+# JSON
+
+
+## Open, Edit, Close
+    import json
+    import os
+
+    ##dict2 = {"127.0.0.1":"2018_09_01.txt",
+    ##        "127.0.0.2":"2018_09_02.txt",
+    ##        "127.0.0.3":"2018_09_03.txt"}
+
+    dict = {}
+
+    exists = os.path.isfile('dict.json')
+    if exists:
+        print("File already exists")
+        f = open("dict.json","r")
+        dict = json.load(f)
+
+    else:
+        pass
+
+    # Get Value from given Key
+
+    ip = "127.0.0.4"
+    if ip in dict:
+        # open existing File (DATA) (Value) in append mode
+        x = dict[ip]
+        print(x)
+
+    else:
+        # create file and write data
+        print("Not found. Adding")
+
+        with open('dict.json', 'r+') as f:
+            # Open json file and add Key : Value
+            dict = json.load(f)
+            dict[ip] = "2018_09_04.txt" # <--- add 'id' value.
+            f.seek(0)        # <--- should reset file position to the beginning.
+            json.dump(dict, f, indent=4)
+            f.truncate()     # remove remaining part
+
+
 # Lists
 
 
