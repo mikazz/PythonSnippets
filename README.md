@@ -555,6 +555,28 @@ Friday 04-01-2019 10:59:37
 python argv.py a b
 
 
+## SYS Simple Loading
+    import time
+    import sys
+
+    for x in range (0, 5):  
+        b = "Loading" + "." * x
+        sys.stdout.write("\r" + b)
+        time.sleep(1)
+
+
+## SYS Simple Repeat Loading
+    import time
+    import sys
+
+    for x in range (0, 5):  
+        b = "Loading" + "." * x
+        for i in ["Loading", "Loading.", "Loading..", "Loading..."]:
+            sys.stdout.write("\r" + i)
+            sys.stdout.write("\033[K")
+            time.sleep(1)
+
+
 ## SYS Counter
     import time
     import sys
