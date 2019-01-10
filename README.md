@@ -731,6 +731,38 @@ python argv.py a b
     print('{} died'.format(t2))
 
 
+## Multithreading from Dictionary / looping over Threads
+
+
+    # Create multiple different functions,
+    # then use the value of Targets to disable their runs.
+
+    import threading
+
+    def foo():
+        print("foo was here")
+
+    def bar():
+        print("bar was here")
+
+    def baz():
+        print("baz was here")
+
+    # Enable: 1/ Disable: 0
+    Targets = {foo: 0, bar: 1, baz: 1}
+
+    for Loop, Enabled in Targets.items():
+        if Enabled == 1:
+            print(" Starting up " + str(Loop))
+            print("   Enabled? " + str(bool(Enabled)))
+            thread = threading.Thread(target=Loop)
+            thread.daemon = True
+            thread.start()
+            thread.join()
+    else:
+        print(" Skipping " + str(Loop))
+
+
 # Socket
 
 
