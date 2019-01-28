@@ -95,6 +95,16 @@ or
         print("File not found")
 
 
+## Count character occurences in a file
+    f = open('file.csv','r')
+    for line in f:
+        counter = line.count('x')
+        if counter != 5:
+            print(line)
+        else:
+            pass
+
+
 ## Manage file input with OS
     import os
 
