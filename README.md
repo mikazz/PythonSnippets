@@ -201,6 +201,16 @@ or
 # Dictionaries
 
 
+## Merge two dictionaries (Python 3.5)
+For dictionaries x and y, z becomes a shallowly merged dictionary with values from y replacing those from x.
+
+    x = {"a":1, "b":2}
+    y = {"a":3, "b":4}
+
+    z = {**x, **y}
+    print(z)
+
+
 ## Looping over dictionary keys
     # key : value
     database = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
