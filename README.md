@@ -173,7 +173,7 @@ Python 3.x
 
 
 ## Try, Except, Finally - error handling
-    x = 0
+    x=0
     try:
         print(1/x)
 
@@ -182,7 +182,9 @@ Python 3.x
 
     finally:
         x = 1
-        print(1/x)
+        print("Lets try anway with:  " + str(x) )
+        print("Answer is " + str(1/x) )
+
 
 
 ## Try if, Except
