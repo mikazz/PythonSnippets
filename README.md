@@ -185,6 +185,19 @@ Python 3.x
         print(1/x)
 
 
+## Try if, Except
+
+    succeed = False
+    try:
+        if succeed is True:
+            print("Yay!")
+
+        elif succeed is False:
+            raise Exception("No succeed")
+    finally:
+        print("But we try anyway")
+
+
 # Strings
 
 
