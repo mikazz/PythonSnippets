@@ -520,7 +520,7 @@ True
 [2, 4, 6, 8, 10]
 
 
-# Apply A Function To A List under condition (equals 0) with List Comprehensions
+## Apply A Function To A List under condition (equals 0) with List Comprehensions
     def is_zero(arg):
         if arg is 0:
             return True
@@ -544,8 +544,8 @@ True
 
 ## *ARGS
     def AVG(*wages):
-        i = 0
-        sum = 0.0
+        i = 0 # count them
+        sum = 0.0 #sum them
 
         for w in wages:
             i+=1
@@ -561,14 +561,14 @@ True
     def printer(text):
         print(text)
 
-    # locals returns a dictionary with a current local symbol table.
     locals()["printer"]("Print this")
-    # globals returns a dictionary with global symbol table.
+
     globals()["printer"]("Global printer")
 
 
 ## Call function attribute by it's name
     import time
+    
     method_to_call = getattr(time, 'clock') #  time.clock()
     result = method_to_call()
     print(result)
@@ -576,6 +576,7 @@ True
 
 ## Call function attribute with an argument by it's name
     import math
+    
     method_to_call = getattr(math, 'fabs') #  math.fabs(x) Return the absolute value of x.
     result = method_to_call(-1)
     print(result)
