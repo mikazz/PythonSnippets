@@ -586,6 +586,20 @@ True
     result = method_to_call(-1)
     print(result)
 
+## Call function attribute with Eval
+    import math
+
+    def get_attribute(attribute):
+        # Check if function has attribute
+        if hasattr(math, attribute):
+            # Return module.attribute
+            return eval("math." + attribute)
+
+    # Call it
+    print(get_attribute("fabs"))
+    # Use it
+    print(get_attribute("fabs")(-1))
+
 
 # Classes
 
