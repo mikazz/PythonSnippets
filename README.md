@@ -555,6 +555,30 @@ True
         print(sum/i)
 
     AVG(1,2,3)
+    
+    
+## Call function by it's name
+    def printer(text):
+        print(text)
+
+    # locals returns a dictionary with a current local symbol table.
+    locals()["printer"]("Print this")
+    # globals returns a dictionary with global symbol table.
+    globals()["printer"]("Global printer")
+
+
+## Call function attribute by it's name
+    import time
+    method_to_call = getattr(time, 'clock') #  time.clock()
+    result = method_to_call()
+    print(result)
+
+
+## Call function attribute with an argument by it's name
+    import math
+    method_to_call = getattr(math, 'fabs') #  math.fabs(x) Return the absolute value of x.
+    result = method_to_call(-1)
+    print(result)
 
 
 # Classes
