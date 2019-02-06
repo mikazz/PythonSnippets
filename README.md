@@ -433,6 +433,12 @@ index: 3, element: d
 index: 4, element: e
 
 
+## Using enumerate for loops, count elements from 1
+    myList = ["a","b","c","d","e"]
+    for count, element in enumerate(myList, 1):
+        print(f"{count}) {element}")
+
+
 ## Using enumerate to replace
     string = "abcdefghijk"
     guid = 16 * ["-"]
