@@ -195,9 +195,9 @@ Python 3.x
             print("Yay!")
 
         elif succeed is False:
-            raise Exception("No succeed")
+            raise Exception("No succeed ;(")
     finally:
-        print("But we try anyway")
+        print("But we execute finally anyway")
 
 
 # Strings
@@ -217,10 +217,15 @@ or
 ## In this case it's just the regular multiplication operator. In Python you can multiply strings by ints:
     print( "hello" * 3 )
 
+hellohellohello
+
 
 ## Python can also implicitly convert between bools and ints, where True is 1 and False is 0, making this sort of thing work:
-    print( "hello" * True ) # Prints "hello"
-    print( "hello" * False ) # Prints ""
+    print( "hello" * True )
+"hello"
+    
+    print( "hello" * False ) 
+ ""
 
 
 # Dictionaries
