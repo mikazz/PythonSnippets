@@ -348,6 +348,19 @@ or
 ## Concatenating Two Python Lists
     list_a += list_b
 
+## List Difference / Remove from List A values from List B
+A = [1, 2, 3, 4, 5]
+B = [2, 4, 6]
+
+C = list(set(A) - set(B))
+print(C)
+
+#or
+
+foo = [x for x in A if x not in B]
+print(foo)
+
+
 
 ## "List Index Out Of Range" Error
     def my_function(list):
