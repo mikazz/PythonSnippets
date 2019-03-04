@@ -682,6 +682,57 @@ Friday 04-01-2019 10:59:37
     print( datetime.datetime.fromtimestamp(float(1546599577099)/1000).strftime('%Y-%m-%d %H:%M:%S.%f') )
 2019-01-04 11:59:37.099000
 
+# Numpy
+
+
+## Create a length-10 integer array filled with zeros
+	import numpy as np
+	np.zeros(10, dtype=int)
+
+
+## Attributes of arrays
+	A = np.ones(shape=(3, 4), dtype=float)
+
+array([[ 1.,  1.,  1.,  1.],
+    [ 1.,  1.,  1.,  1.],
+    [ 1.,  1.,  1.,  1.]])
+	
+
+# Matplotlib Library
+
+
+## Basic Plot
+
+	import matplotlib.pyplot as plt
+
+	plt.plot([1, 2, 3, 2.5])
+	plt.ylabel('some numbers')
+
+
+## Customized basic plot
+
+    import matplotlib.pyplot as plt
+	# [x][y]
+	plt.plot([1, 2, 3, 4], [10, 20, 25, 30], color='lightblue', linewidth=3)
+	plt.scatter([1,2,3], [4,5,6], color='darkgreen', marker='^')
+	
+	plt.xlim(0.5, 4.5)
+	plt.title("Title of the plot")
+	plt.xlabel("This is the x-label")
+	plt.ylabel("This is the y-label")
+
+	
+## Generate data and plot
+    
+    import matplotlib.pyplot as plt
+	# np.linspace - Return evenly spaced numbers over a specified interval.
+	x = np.linspace(-np.pi, np.pi, 200)
+	sine = np.sin(x)
+	cosine = np.cos(x)
+	
+	fig, ax = plt.subplots()
+	ax.plot(x, sine, x, cosine)
+
 
 # SYS Library
 
