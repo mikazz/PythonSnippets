@@ -638,7 +638,65 @@ True
 
 
 ## Properties vs. Getters and Setters
-    print("HERE")
+
+from random import randint
+
+
+class User(object):
+ 
+    def __str__(self):
+       return "This is instance of User class"
+ 
+    def __init__(self, name, password):
+        self.__name = name
+        self.__password = password
+        self.__gold = 10
+        self.__level = 1
+        self.__power = randint(0, 5)  # random power between 0 and 5
+
+    @property
+    def power(self):
+        return self.__power
+
+    # Name
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, new_name):
+        self.__name = new_name
+
+    # Gold
+    @property
+    def gold(self):
+        return self.__gold
+ 
+    @gold.setter
+    def gold(self, new_gold):
+        try:
+            self.__gold = int(new_gold)
+        except ValueError, TypeError:
+            print('Must be an integer')
+            raise
+
+if __name__ == "__main__":
+    # Create new instance of User Class
+    user = User(name='Mike', password='123')
+    print(user)
+    print(user.name)
+    print(user.gold)
+
+    # Set User Attribute Gold
+    user.gold = 2222
+    print(user.gold)
+
+    # Set User Attribute Name
+    user.name = "Steve"
+    print(user.name) # User Attribute
+
+    # 
+    print(user.power)
 
 
 # Recursion
@@ -690,52 +748,52 @@ Friday 04-01-2019 10:59:37
 
 
 ## Create a length-10 integer array filled with zeros
-	import numpy as np
-	np.zeros(10, dtype=int)
+    import numpy as np
+    np.zeros(10, dtype=int)
 
 
 ## Attributes of arrays
-	A = np.ones(shape=(3, 4), dtype=float)
+    A = np.ones(shape=(3, 4), dtype=float)
 
 array([[ 1.,  1.,  1.,  1.],
     [ 1.,  1.,  1.,  1.],
     [ 1.,  1.,  1.,  1.]])
-	
+
 
 # Matplotlib Library
 
 
 ## Basic Plot
 
-	import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt
 
-	plt.plot([1, 2, 3, 2.5])
-	plt.ylabel('some numbers')
+    plt.plot([1, 2, 3, 2.5])
+    plt.ylabel('some numbers')
 
 
 ## Customized basic plot
 
     import matplotlib.pyplot as plt
-	# [x][y]
-	plt.plot([1, 2, 3, 4], [10, 20, 25, 30], color='lightblue', linewidth=3)
-	plt.scatter([1,2,3], [4,5,6], color='darkgreen', marker='^')
-	
-	plt.xlim(0.5, 4.5)
-	plt.title("Title of the plot")
-	plt.xlabel("This is the x-label")
-	plt.ylabel("This is the y-label")
+    # [x][y]
+    plt.plot([1, 2, 3, 4], [10, 20, 25, 30], color='lightblue', linewidth=3)
+    plt.scatter([1,2,3], [4,5,6], color='darkgreen', marker='^')
 
-	
+    plt.xlim(0.5, 4.5)
+    plt.title("Title of the plot")
+    plt.xlabel("This is the x-label")
+    plt.ylabel("This is the y-label")
+
+
 ## Generate data and plot
     
     import matplotlib.pyplot as plt
-	# np.linspace - Return evenly spaced numbers over a specified interval.
-	x = np.linspace(-np.pi, np.pi, 200)
-	sine = np.sin(x)
-	cosine = np.cos(x)
-	
-	fig, ax = plt.subplots()
-	ax.plot(x, sine, x, cosine)
+    # np.linspace - Return evenly spaced numbers over a specified interval.
+    x = np.linspace(-np.pi, np.pi, 200)
+    sine = np.sin(x)
+    cosine = np.cos(x)
+
+    fig, ax = plt.subplots()
+    ax.plot(x, sine, x, cosine)
 
 
 # SYS Library
