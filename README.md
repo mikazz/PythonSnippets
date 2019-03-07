@@ -639,69 +639,6 @@ True
 
 ## Properties vs. Getters and Setters
 
-	from random import randint
-
-
-	class User(object):
-
-		def __str__(self):
-		   return "This is instance of User class"
-
-		def __init__(self, name, password):
-			self.__name = name
-			self.__password = password
-			self.__gold = 10
-			self.__level = 1
-			self.__power = randint(0, 5)  # random power between 0 and 5
-
-		@property
-		def power(self):
-			return self.__power
-
-		# Name
-		@property
-		def name(self):
-			return self.__name
-
-		@name.setter
-		def name(self, new_name):
-			self.__name = new_name
-
-		# Gold
-		@property
-		def gold(self):
-			return self.__gold
-
-		@gold.setter
-		def gold(self, new_gold):
-			try:
-				self.__gold = int(new_gold)
-			except ValueError, TypeError:
-				print('Must be an integer')
-				raise
-
-
-	if __name__ == "__main__":
-		# Create new instance of User Class
-		user = User(name='Mike', password='123')
-		print(user)
-		print(user.name)
-		print(user.gold)
-
-		# Set User Attribute Gold
-		user.gold = 2222
-		print(user.gold)
-
-		# Set User Attribute Name
-		user.name = "Steve"
-		print(user.name) # User Attribute
-
-		# 
-		print(user.power)
-
-    
-
-
 
 # Recursion
 
