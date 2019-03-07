@@ -638,6 +638,7 @@ True
 
 
 ## Properties vs. Getters and Setters
+
 	from random import randint
 
 
@@ -697,6 +698,9 @@ True
 
 		# 
 		print(user.power)
+
+    
+
 
 
 # Recursion
