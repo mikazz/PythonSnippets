@@ -559,6 +559,22 @@ True
 [0, 1]
 
 
+## Remove all negative numbers and every third number with List Comprehensions
+
+    list = [1, 2, 3, 4, 5, 6, -1, 8, 9, 10, -2, 5]
+    # Show me all numbers that are greater or equal 0 and each index is not mod 3 = 2
+    print([x for i, x in enumerate(list) if x >= 0 and i % 3 != 2]) 
+
+    # 0 % 3 = 0
+    # 1 % 3 = 1
+    # 2 % 3 = 2 <-- 3 element
+
+    # 3 % 3 = 0
+    # 4 % 3 = 1
+    # 5 % 3 = 2 <-- 3 element
+[1, 2, 4, 5, 8, 10]
+
+
 # Functions
 
 
