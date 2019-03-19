@@ -661,6 +661,9 @@ True
     class User(object):
      
         def __str__(self):
+           """
+               Special "Dunder method" called by class, when class is used as a string
+           """
            return "This is instance of User class"
      
         def __init__(self, name, password):
