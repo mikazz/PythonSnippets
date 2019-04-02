@@ -560,18 +560,19 @@ True
 
 
 ## Remove all negative numbers and every third number with List Comprehensions
+```python
+list = [1, 2, 3, 4, 5, 6, -1, 8, 9, 10, -2, 5]
+# Show me all numbers that are greater or equal 0 and each index is not mod 3 = 2
+print([x for i, x in enumerate(list) if x >= 0 and i % 3 != 2]) 
 
-    list = [1, 2, 3, 4, 5, 6, -1, 8, 9, 10, -2, 5]
-    # Show me all numbers that are greater or equal 0 and each index is not mod 3 = 2
-    print([x for i, x in enumerate(list) if x >= 0 and i % 3 != 2]) 
+# 0 % 3 = 0
+# 1 % 3 = 1
+# 2 % 3 = 2 <-- 3 element
 
-    # 0 % 3 = 0
-    # 1 % 3 = 1
-    # 2 % 3 = 2 <-- 3 element
-
-    # 3 % 3 = 0
-    # 4 % 3 = 1
-    # 5 % 3 = 2 <-- 3 element
+# 3 % 3 = 0
+# 4 % 3 = 1
+# 5 % 3 = 2 <-- 3 element
+```
 [1, 2, 4, 5, 8, 10]
 
 
@@ -579,78 +580,93 @@ True
 
 
 ## *ARGS
-    def AVG(*wages):
-        i = 0 # count them
-        sum = 0.0 #sum them
 
-        for w in wages:
-            i+=1
-            sum+=w
-        else:
-            print('No wages given')
-        print(sum/i)
 
-    AVG(1,2,3)
-    
-    
+```python
+def AVG(*wages):
+    i = 0 # count them
+    sum = 0.0 #sum them
+
+    for w in wages:
+        i+=1
+        sum+=w
+    else:
+        print('No wages given')
+    print(sum/i)
+
+AVG(1,2,3)
+```
+
+
 ## Call function by it's name
-    def printer(text):
-        print(text)
+```python
+def printer(text):
+    print(text)
 
-    locals()["printer"]("Print this")
+locals()["printer"]("Print this")
 
-    globals()["printer"]("Global printer")
+globals()["printer"]("Global printer")
+```
 
 
 ## Call function attribute by it's name
-    import time
-    
-    method_to_call = getattr(time, 'clock') #  time.clock()
-    result = method_to_call()
-    print(result)
+```python
+import time
+
+method_to_call = getattr(time, 'clock') #  time.clock()
+result = method_to_call()
+print(result)
+```
 
 
 ## Call function attribute with an argument by it's name
-    import math
-    
-    method_to_call = getattr(math, 'fabs') #  math.fabs(x) Return the absolute value of x.
-    result = method_to_call(-1)
-    print(result)
+```python
+import math
 
+method_to_call = getattr(math, 'fabs') #  math.fabs(x) Return the absolute value of x.
+result = method_to_call(-1)
+print(result)
+```
+
+
+```python
 ## Call function attribute with Eval
-    import math
+import math
 
-    def get_attribute(attribute):
-        # Check if function has attribute
-        if hasattr(math, attribute):
-            # Return module.attribute
-            return eval("math." + attribute)
+def get_attribute(attribute):
+    # Check if function has attribute
+    if hasattr(math, attribute):
+        # Return module.attribute
+        return eval("math." + attribute)
 
-    # Call it
-    print(get_attribute("fabs"))
-    # Use it
-    print(get_attribute("fabs")(-1))
+# Call it
+print(get_attribute("fabs"))
+# Use it
+print(get_attribute("fabs")(-1))
+```
 
 
 # Classes
 
 
 ## Simple class
-    class Dog():
-        """Represent a dog."""
+```python
+class Dog():
+    """Represent a dog."""
 
-        def __init__(self, name):
-            """Initialize dog object."""
-            self.name = name
+    def __init__(self, name):
+        """Initialize dog object."""
+        self.name = name
 
-        def sit(self):
-            """Simulate sitting."""
-            print(self.name + " is sitting.")
+    def sit(self):
+        """Simulate sitting."""
+        print(self.name + " is sitting.")
 
-    my_dog = Dog('Peso')
+my_dog = Dog('Peso')
 
-    print(my_dog.name + " is a great dog!")
-    my_dog.sit()
+print(my_dog.name + " is a great dog!")
+my_dog.sit()
+```
 
 
 ## Properties vs. Getters and Setters
@@ -659,9 +675,11 @@ True
 ```python
 from random import randint
 
-
 class User(object):
- 
+    """
+    @property: Create functions for managing the getting, setting and deleting of an attribute. 
+    """
+
     def __str__(self):
        """
            Special "Dunder method" called by class, when class is used as a string
@@ -739,6 +757,46 @@ class Pizza:
     @classmethod
     def prosciutto(cls):
         return cls(['mozzarella', 'tomatoes', 'ham'])
+```
+
+
+## Class method works and inheritance
+
+
+```python
+from datetime import date
+
+# random Person
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    @staticmethod
+    """
+    @staticmethod: A method that does not receive the implicit argument self as a first argument.
+    """
+    def fromFathersAge(name, fatherAge, fatherPersonAgeDiff):
+        return Person(name, date.today().year - fatherAge + fatherPersonAgeDiff)
+
+    @classmethod
+    """
+    @classmethod: A method that receives the class as an implicit argument instead of the instance.
+    """
+    def fromBirthYear(cls, name, birthYear):
+        return cls(name, date.today().year - birthYear)
+
+    def display(self):
+        print(self.name + "'s age is: " + str(self.age))
+
+class Man(Person):
+    sex = 'Male'
+
+man = Man.fromBirthYear('John', 1985)
+print(isinstance(man, Man))
+
+man1 = Man.fromFathersAge('John', 1965, 20)
+print(isinstance(man1, Man))
 ```
 
 
