@@ -629,8 +629,8 @@ print(result)
 ```
 
 
-```python
 ## Call function attribute with Eval
+```python
 import math
 
 def get_attribute(attribute):
