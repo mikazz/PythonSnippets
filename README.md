@@ -1018,98 +1018,128 @@ python argv.py a b
 
 
 ## Manage multiple threads
+```python
+import threading
+import time
 
-    import threading
-    import time
+def sleeper_thread(seconds, name):
+    print('{}: Hi, I am {}. Going to sleep for {} seconds \n'.format(name, name, seconds))
+    time.sleep(seconds)
 
-    def sleeper_thread(seconds, name):
-        print('{}: Hi, I am {}. Going to sleep for {} seconds \n'.format(name, name, seconds))
-        time.sleep(seconds)
+    print('{}: I just woke up \n'.format(name))
+    print('{}: hello'.format(name))
+    print('{}: what is going on'.format(name))
+    print('---------------------------------- \n')
 
-        print('{}: I just woke up \n'.format(name))
-        print('{}: hello'.format(name))
-        print('{}: what is going on'.format(name))
-        print('---------------------------------- \n')
+t1 = threading.Thread(target = sleeper_thread, name = 'thread1', args = (10, 'thread1') )
+t2 = threading.Thread(target = sleeper_thread, name = 'thread2', args = (15, 'thread2') )
 
-    t1 = threading.Thread(target = sleeper_thread, name = 'thread1', args = (10, 'thread1') )
-    t2 = threading.Thread(target = sleeper_thread, name = 'thread2', args = (15, 'thread2') )
+t1.start() # Start the thread’s activity
+print('{} is alive \n'.format(t1))
+t2.start() # Start the thread’s activity
+print('{} is alive \n'.format(t2))
 
-    t1.start() # Start the thread’s activity
-    print('{} is alive \n'.format(t1))
-    t2.start() # Start the thread’s activity
-    print('{} is alive \n'.format(t2))
-
-    t1.join() # Wait until the thread terminates
-    print('{} died'.format(t1))
-    t2.join() # Wait until the thread terminates
-    print('{} died'.format(t2))
+t1.join() # Wait until the thread terminates
+print('{} died'.format(t1))
+t2.join() # Wait until the thread terminates
+print('{} died'.format(t2))
+```
 
 
 ## Multithreading from Dictionary / looping over Threads
 
+```python
+# Create multiple different functions,
+# then use the value of Targets to disable their runs.
 
-    # Create multiple different functions,
-    # then use the value of Targets to disable their runs.
+import threading
 
-    import threading
+def foo():
+    print("foo was here")
 
-    def foo():
-        print("foo was here")
+def bar():
+    print("bar was here")
 
-    def bar():
-        print("bar was here")
+def baz():
+    print("baz was here")
 
-    def baz():
-        print("baz was here")
+# Enable: 1/ Disable: 0
+Targets = {foo: 0, bar: 1, baz: 1}
 
-    # Enable: 1/ Disable: 0
-    Targets = {foo: 0, bar: 1, baz: 1}
+for Loop, Enabled in Targets.items():
+    if Enabled == 1:
+        print(" Starting up " + str(Loop))
+        print("   Enabled? " + str(bool(Enabled)))
+        thread = threading.Thread(target=Loop)
+        thread.daemon = True
+        thread.start()
+        thread.join()
+else:
+    print(" Skipping " + str(Loop))
+```
 
-    for Loop, Enabled in Targets.items():
-        if Enabled == 1:
-            print(" Starting up " + str(Loop))
-            print("   Enabled? " + str(bool(Enabled)))
-            thread = threading.Thread(target=Loop)
-            thread.daemon = True
-            thread.start()
-            thread.join()
-    else:
-        print(" Skipping " + str(Loop))
+
+# Coroutines
+```python
+import asyncio
+
+async def compute1():
+    for i in range(5):
+        print('compute1 %d' % i)
+        await asyncio.sleep(.1)
+
+async def compute2():
+    for i in range(5):
+        print('compute2 %d' % i)
+        await asyncio.sleep(.2)
+
+async def main():
+    await asyncio.gather(compute1(), compute2())
+    print("Done")
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+loop.close()
+```
 
 
 # Socket
 
 
 ## Simple UDP Client - Server
-Client
+```python
+#Client
 
-    import socket
-    
-    HOST = '127.0.0.1'
-    PORT = 1337
- 
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
-    s.connect((HOST, PORT))
+import socket
 
-    s.send('Hello World 1')
-    s.send('Hello World 2')
-    s.send('Hello World 3')
+HOST = '127.0.0.1'
+PORT = 1337
 
-Server
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
+s.connect((HOST, PORT))
 
-    import socket
+s.send('Hello World 1')
+s.send('Hello World 2')
+s.send('Hello World 3')
+```
 
-    HOST = '127.0.0.1' # 0.0.0.0 - listen on all network cards
-    PORT = 1337
+```python
+#Server
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
-    s.bind((HOST, PORT))
+import socket
 
-    print("Waiting on port: " +  str(PORT))
-    while True:
-        data, addr = s.recvfrom(1024)
-        print(data)
-        print(addr) # client PORT and HOST
+HOST = '127.0.0.1' # 0.0.0.0 - listen on all network cards
+PORT = 1337
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # SOCK_DGRAM specifies datagram (udp) sockets.
+s.bind((HOST, PORT))
+
+print("Waiting on port: " +  str(PORT))
+while True:
+    data, addr = s.recvfrom(1024)
+    print(data)
+    print(addr) # client PORT and HOST
+```
 
 
 ## Send file via UDP
