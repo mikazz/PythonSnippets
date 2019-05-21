@@ -164,95 +164,119 @@ Python 3.x
 # Automate Testing
 
 
-## Assert
-    def inc(x):
-        return x + 1
+## Any
+```python
+data= True
+id = None
+time = True
+group = True
 
-    def test_answer():
-        assert inc(3) == 5
-    
-    print(test_answer())
+var = any(v is None for v in (data, id, time, group))
+print(var)
+```
+
+
+## Assert
+```python
+def inc(x):
+    return x + 1
+
+def test_answer():
+    assert inc(3) == 5
+
+print(test_answer())
+```
 
 
 ## Try, Except, Finally - error handling
-    x=0
-    try:
-        print(1/x)
+```python
+x=0
+try:
+    print(1/x)
 
-    except Exception as e:
-        print("Error: " + str(e))
+except Exception as e:
+    print("Error: " + str(e))
 
-    finally:
-        x = 1
-        print("Lets try anway with:  " + str(x) )
-        print("Answer is " + str(1/x) )
-
+finally:
+    x = 1
+    print("Lets try anway with:  " + str(x) )
+    print("Answer is " + str(1/x) )
+```
 
 
 ## Try if, Except
+```python
+succeed = False
+try:
+    if succeed is True:
+        print("Yay!")
 
-    succeed = False
-    try:
-        if succeed is True:
-            print("Yay!")
-
-        elif succeed is False:
-            raise Exception("No succeed ;(")
-    finally:
-        print("But we execute finally anyway")
+    elif succeed is False:
+        raise Exception("No succeed ;(")
+finally:
+    print("But we execute finally anyway")
+```
 
 
 # Strings
 
 
 ## Split phrase into words
-    PHRASE = "Would you like to know more?"
-    num_words = len(PHRASE.split(" "))
-    print("There are {:} words in {:}".format(num_words, PHRASE))
+```python
+PHRASE = "Would you like to know more?"
+num_words = len(PHRASE.split(" "))
+print("There are {:} words in {:}".format(num_words, PHRASE))
 
-or
+#or
 
-    PHRASE = "Would you like to know more?"
-    print("There are %s words in %s" % (PHRASE.count(' ') + 1, PHRASE))
+PHRASE = "Would you like to know more?"
+print("There are %s words in %s" % (PHRASE.count(' ') + 1, PHRASE))
+```
 
 
 ## In this case it's just the regular multiplication operator. In Python you can multiply strings by ints:
-    print( "hello" * 3 )
-
-hellohellohello
+```python
+print( "hello" * 3 )
+#hellohellohello
+```
 
 
 ## Python can also implicitly convert between bools and ints, where True is 1 and False is 0, making this sort of thing work:
-    print( "hello" * True )
-"hello"
+```python
+print( "hello" * True )
+#"hello"
     
-    print( "hello" * False ) 
- ""
+print( "hello" * False ) 
+```
 
 
 # Dictionaries
 
 
 ## Merge two dictionaries (Python 3.5)
-For dictionaries x and y, z becomes a shallowly merged dictionary with values from y replacing those from x.
+```python
+#For dictionaries x and y, z becomes a shallowly merged dictionary with values from y replacing those from x.
 
-    x = {"a":1, "b":2}
-    y = {"a":3, "b":4}
+x = {"a":1, "b":2}
+y = {"a":3, "b":4}
 
-    z = {**x, **y}
-    print(z)
+z = {**x, **y}
+print(z)
+```
 
 
 ## Looping over dictionary keys
-    # key : value
-    database = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
+```python
+# key : value
+database = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
 
-    for key in database.keys():
-        if key.startswith('r'):
-            del database[key]
+for key in database.keys():
+    if key.startswith('r'):
+        del database[key]
 
-    for key in database:
-        print(key)
+for key in database:
+    print(key)
+```
 
 
 ## Looping over dictionary keys and values
