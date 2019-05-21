@@ -268,109 +268,123 @@ print(z)
 ## Looping over dictionary keys
 ```python
 # key : value
-database = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
+dictionary = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
 
-for key in database.keys():
+for key in dictionary.keys():
     if key.startswith('r'):
-        del database[key]
+        del dictionary[key]
 
-for key in database:
+for key in dictionary:
     print(key)
 ```
 
 
 ## Looping over dictionary keys and values
+```python
+dictionary = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
+for key, value in dictionary.items():
+    print(key + " ---> " + value)
 
-    for key, value in database.items():
-        print(key + " ---> " + value)
+# or
 
-or
-
-    for key in database:
-        print(key + " ---> " + database[key])
+# Access by key
+for key in dictionary:
+    print(key + " ---> " + dictionary[key])
+```
 
 
 ## Construct a dictionary from pairs / two lists
+```python
+names = ['0. Cory', '1. Trevor', '2. Ray', '3. Ricky']
+colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
 
-    names = ['0. Cory', '1. Trevor', '2. Ray', '3. Ricky']
-    colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
-
-    database = dict(zip(names, colors))
-    print(database)
+dictionary = dict(zip(names, colors))
+print(dictionary)
+```
 
 
 ## Dictionary mapping characters
-    normal = u' 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~'
-    wide = u'　０１２３４５６７８９ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ！゛＃＄％＆（）＊＋、ー。／：；〈＝〉？＠［\\］＾＿‘｛｜｝～'
+```python
+normal = u' 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~'
+wide = u'　０１２３４５６７８９ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ！゛＃＄％＆（）＊＋、ー。／：；〈＝〉？＠［\\］＾＿‘｛｜｝～'
 
-    def vaporize(text):
-        # ord - String to Unicode code point. Example: ord('a') -> int 97
-        widemap = dict((ord(x[0]), x[1]) for x in zip(normal, wide))
-        return text.translate(widemap)
+def vaporize(text):
+    # ord - String to Unicode code point. Example: ord('a') -> int 97
+    widemap = dict((ord(x[0]), x[1]) for x in zip(normal, wide))
+    return text.translate(widemap)
 
-    print(vaporize("aesthetics"))
+print(vaporize("aesthetics"))
+```
 
 
 # JSON
 
 
 ## Open, Edit, Close
-    import json
-    import os
+```python
+import json
+import os
 
-    ##dict2 = {"127.0.0.1":"2018_09_01.txt",
-    ##        "127.0.0.2":"2018_09_02.txt",
-    ##        "127.0.0.3":"2018_09_03.txt"}
+#dict2 = {"127.0.0.1":"2018_09_01.txt",
+#        "127.0.0.2":"2018_09_02.txt",
+#        "127.0.0.3":"2018_09_03.txt"}
 
-    dict = {}
+dict = {}
 
-    exists = os.path.isfile('dict.json')
-    if exists:
-        print("File already exists")
-        f = open("dict.json","r")
+exists = os.path.isfile('dict.json')
+if exists:
+    print("File already exists")
+    f = open("dict.json","r")
+    dict = json.load(f)
+
+else:
+    pass
+
+# Get Value from given Key
+
+ip = "127.0.0.4"
+if ip in dict:
+    # open existing File (DATA) (Value) in append mode
+    x = dict[ip]
+    print(x)
+
+else:
+    # create file and write data
+    print("Not found. Adding")
+
+    with open('dict.json', 'r+') as f:
+        # Open json file and add Key : Value
         dict = json.load(f)
-
-    else:
-        pass
-
-    # Get Value from given Key
-
-    ip = "127.0.0.4"
-    if ip in dict:
-        # open existing File (DATA) (Value) in append mode
-        x = dict[ip]
-        print(x)
-
-    else:
-        # create file and write data
-        print("Not found. Adding")
-
-        with open('dict.json', 'r+') as f:
-            # Open json file and add Key : Value
-            dict = json.load(f)
-            dict[ip] = "2018_09_04.txt" # <--- add 'id' value.
-            f.seek(0)        # <--- should reset file position to the beginning.
-            json.dump(dict, f, indent=4)
-            f.truncate()     # remove remaining part
-
+        dict[ip] = "2018_09_04.txt" # <--- add 'id' value.
+        f.seek(0)        # <--- should reset file position to the beginning.
+        json.dump(dict, f, indent=4)
+        f.truncate()     # remove remaining part
+```
 
 # Lists
 
-
+```python
 ## Insert Into The Beginning Of A List In Python
-    list.insert(0, value)
+list.insert(0, value)
+```
 
 
 ## Insert Into The End Of A List In Python
-    list.append(value)
+```python
+list.append(value)
+```
 
 
 ## Insert Into An Existing Index Of A Python List
-    list[index] = value
+```python
+list[index] = value
+```
 
 
 ## Concatenating Two Python Lists
+```python
     list_a += list_b
+```
 
 ## List Difference / Remove from List A values from List B
 A = [1, 2, 3, 4, 5]
