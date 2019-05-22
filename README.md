@@ -1095,6 +1095,94 @@ for _ in range(50):
 # Threading
 
 
+## Creating Threads
+```python
+import threading
+import random
+import time
+import sys
+
+# sys output line codes
+CURSOR_UP_ONE = '\x1b[1A'
+ERASE_LINE = '\x1b[2K'
+
+
+class MyThread(threading.Thread):
+    def __str__(self):
+        ''' Return str representation'''
+        return self.getName()
+    
+    def __init__(self, val):
+        ''' Constructor '''
+ 
+        threading.Thread.__init__(self)
+        self.val = val
+        self.signal = threading.Event()
+        self.period = 5
+
+    def run(self):
+        ''' Main run loop '''
+        while True:
+            if self.signal.is_set():  # Stop if signal is set
+                break
+
+            if self.val == 15: # Inside Stop if val == 15
+                break
+            
+            self.val += 1
+         
+            # Sleep for random time between 1 ~ 5 second
+            secondsToSleep = random.randint(1, 5)
+            time.sleep(secondsToSleep)
+
+    def stop(self):
+        ''' Stop thread by sending signal '''
+        self.signal.set()
+        self.join(timeout=self.period)
+        if self.is_alive():
+            raise threading.ThreadError("Stopping thread failed")
+
+
+if __name__ == '__main__':
+    # Declare objects of MyThread class
+    myThreadOb1 = MyThread(4)
+    myThreadOb2 = MyThread(4)
+    
+    # Set thread name
+    myThreadOb1.setName('Thread 1')
+    myThreadOb2.setName('Thread 2')
+
+    # Start running the threads!
+    myThreadOb1.start()
+    myThreadOb2.start()
+    
+    while True:
+        #sys.stdout.write('T: %s value: %d' % (myThreadOb1.getName(), myThreadOb1.val))
+        #sys.stdout.write('\r' + 'T: %s value: %d' % (myThreadOb2.getName(), myThreadOb2.val))
+        
+        first_line = CURSOR_UP_ONE + ERASE_LINE + myThreadOb1.getName() + " Value: " + str(myThreadOb1.val) + " Alive: " + str(myThreadOb1.is_alive()) + "\n"
+        second_line = myThreadOb2.getName() + " Value: " + str(myThreadOb2.val) + " Alive: " + str(myThreadOb2.is_alive()) + "\r"
+
+        sys.stdout.write(first_line)
+        sys.stdout.write(second_line)
+        sys.stdout.flush()
+        time.sleep(1)
+
+        # Send signal to stop threads if:
+        if myThreadOb1.val == 6:
+            myThreadOb1.stop()
+
+        if myThreadOb2.val == 6:
+            myThreadOb2.stop()
+
+        # Quit refreshing Loop if all threads are dead
+        if all(item == False for item in [myThreadOb1.is_alive(), myThreadOb2.is_alive()]):
+            break
+
+    sys.stdout.write("\n" + "Terminating..." + "\r")
+```
+
+
 ## Manage multiple threads
 ```python
 import threading
