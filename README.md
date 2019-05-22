@@ -883,6 +883,7 @@ Friday 04-01-2019 10:59:37
     print( datetime.datetime.fromtimestamp(float(1546599577099)/1000).strftime('%Y-%m-%d %H:%M:%S.%f') )
 2019-01-04 11:59:37.099000
 
+
 # Numpy
 
 
@@ -939,6 +940,7 @@ array([[ 1.,  1.,  1.,  1.],
 
 
 ## SYS argv
+```python
     import sys
 
     first_argument = sys.argv[1]
@@ -947,109 +949,144 @@ array([[ 1.,  1.,  1.,  1.],
     print(first_argument)
     print(second_argument)
 
-python argv.py a b
+#>python argv.py a b
+```
 
 
 ## SYS Simple Loading
-    import time
-    import sys
+```python
+import time
+import sys
 
-    for x in range (0, 5):  
-        b = "Loading" + "." * x
-        sys.stdout.write("\r" + b)
-        time.sleep(1)
+for x in range (0, 5):  
+    b = "Loading" + "." * x
+    sys.stdout.write("\r" + b)
+    time.sleep(1)
+```
 
 
 ## SYS Simple Repeat Loading
-    import time
-    import sys
+```python
+import time
+import sys
 
-    for x in range (0, 5):  
-        b = "Loading" + "." * x
-        for i in ["Loading", "Loading.", "Loading..", "Loading..."]:
-            sys.stdout.write("\r" + i)
-            sys.stdout.write("\033[K")
-            time.sleep(1)
+for x in range (0, 5):  
+    b = "Loading" + "." * x
+    for i in ["Loading", "Loading.", "Loading..", "Loading..."]:
+        sys.stdout.write("\r" + i)
+        sys.stdout.write("\033[K")
+        time.sleep(1)
+```
 
 
 ## SYS Counter
-    import time
-    import sys
+```python
+import time
+import sys
 
-    counter = 0
-    Done = False
+counter = 0
+Done = False
 
-    while not Done:
-        #print(counter)
-        sys.stdout.write("\r " + str(counter))
-        sys.stdout.flush()
-        counter +=1
-        if counter == 10:
-            Done = True
-        time.sleep(1) # each one sec
+while not Done:
+    #print(counter)
+    sys.stdout.write("\r " + str(counter))
+    sys.stdout.flush()
+    counter +=1
+    if counter == 10:
+        Done = True
+    time.sleep(1) # each one sec
+```
+
+
+## SYS Flush two lines at the same time
+```python
+import sys
+from random import randint
+import time
+
+CURSOR_UP_ONE = '\x1b[1A'
+ERASE_LINE = '\x1b[2K'
+
+while True:
+    data_on_first_line = CURSOR_UP_ONE + ERASE_LINE + str(randint(100, 999)) + "\n"
+    data_on_second_line = str(randint(100, 999)) + "\r"
+    
+    sys.stdout.write(data_on_first_line)
+    sys.stdout.write(data_on_second_line)
+    sys.stdout.flush()
+    time.sleep(1)
+```
 
 
 ## SYS Measuring elapsed time / timer
-    import time
-    import sys
+```python
+import time
+import sys
 
-    counter = 0
-    Done = False
+counter = 0
+Done = False
 
-    start_time = time.time()
-    while not Done:
-        #print(counter)
-        elapsed_time = time.time() - start_time
+start_time = time.time()
+while not Done:
+    #print(counter)
+    elapsed_time = time.time() - start_time
 
-        sys.stdout.write("\r " + "Elapsed time: " + str(time.strftime("%H:%M:%S", time.gmtime(elapsed_time))))
-        sys.stdout.flush()
-        time.sleep(1)
+    sys.stdout.write("\r " + "Elapsed time: " + str(time.strftime("%H:%M:%S", time.gmtime(elapsed_time))))
+    sys.stdout.flush()
+    time.sleep(1)
+```
 
 
 ## SYS Progress Bar
-    import time
-    import sys
+```python
+import time
+import sys
 
-    toolbar_width = 40
+toolbar_width = 40
 
-    # setup toolbar
-    sys.stdout.write("[%s]" % (" " * toolbar_width))
+# setup toolbar
+sys.stdout.write("[%s]" % (" " * toolbar_width))
+sys.stdout.flush()
+sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
+
+for i in xrange(toolbar_width):
+    time.sleep(0.1) # do real work here
+    # update the bar
+    sys.stdout.write("-") # try: (u"█")
     sys.stdout.flush()
-    sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
-
-    for i in xrange(toolbar_width):
-        time.sleep(0.1) # do real work here
-        # update the bar
-        sys.stdout.write("-") # try: (u"█")
-        sys.stdout.flush()
+```
 
 
 ## SYS Progress Bar With Percentage
-    from time import sleep
-    import sys
+```python
+from time import sleep
+import sys
 
-    for i in range(21):
-        sys.stdout.write('\r')
-        sys.stdout.write("[%-20s] %d%%" % ('-'*i, 5*i))
-        sys.stdout.flush()
-        sleep(0.25)
+for i in range(21):
+    sys.stdout.write('\r')
+    sys.stdout.write("[%-20s] %d%%" % ('-'*i, 5*i))
+    sys.stdout.flush()
+    sleep(0.25)
+```
 
 
 ## SYS Spinning (rotating) Cursor
-    import time
-    import sys
+```python
+import time
+import sys
 
-    def spinning_cursor():
-        while True:
-            for cursor in '|/-\\':
-                yield cursor
+def spinning_cursor():
+    while True:
+        for cursor in '|/-\\':
+            yield cursor
 
-    spinner = spinning_cursor()
-    for _ in range(50):
-        sys.stdout.write(next(spinner))
-        sys.stdout.flush()
-        time.sleep(0.1)
-        sys.stdout.write('\r')
+spinner = spinning_cursor()
+for _ in range(50):
+    sys.stdout.write(next(spinner))
+    sys.stdout.flush()
+    time.sleep(0.1)
+    sys.stdout.write('\r')
+```
 
 
 # Threading
