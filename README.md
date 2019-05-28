@@ -285,9 +285,7 @@ dictionary = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
 for key, value in dictionary.items():
     print(key + " ---> " + value)
 
-# or
-
-# Access by key
+# or Access by key
 for key in dictionary:
     print(key + " ---> " + dictionary[key])
 ```
@@ -361,32 +359,27 @@ else:
         f.truncate()     # remove remaining part
 ```
 
+
 # Lists
 
+
 ```python
-## Insert Into The Beginning Of A List In Python
+# Insert Into The Beginning Of A List In Python
 list.insert(0, value)
-```
 
-
-## Insert Into The End Of A List In Python
-```python
+# Insert Into The End Of A List In Python
 list.append(value)
-```
 
-
-## Insert Into An Existing Index Of A Python List
-```python
+# Insert Into An Existing Index Of A Python List
 list[index] = value
+
+# Concatenating Two Python Lists
+list_a += list_b
 ```
 
-
-## Concatenating Two Python Lists
-```python
-    list_a += list_b
-```
 
 ## List Difference / Remove from List A values from List B
+```python
 A = [1, 2, 3, 4, 5]
 B = [2, 4, 6]
 
@@ -397,115 +390,144 @@ print(C)
 
 foo = [x for x in A if x not in B]
 print(foo)
-
+```
 
 
 ## "List Index Out Of Range" Error
-    def my_function(list):
-        try:
-            third_value = list[2]
-        except IndexError:
-            print(f'list has only {len(list)} elements')
-            raise
+```python
+def my_function(list):
+    try:
+        third_value = list[2]
+    except IndexError:
+        print(f'list has only {len(list)} elements')
+        raise
 
-    my_function([1,2])
-list has only 2 elements
-IndexError: list index out of range
+my_function([1,2])
+# list has only 2 elements
+# IndexError: list index out of range
+```
 
 
 ## Looping over over List: two collections
+```python
+names = ['0. Cory', '1. Trevor', '2. Ray', '3. Ricky']
+colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
 
-    names = ['0. Cory', '1. Trevor', '2. Ray', '3. Ricky']
-    colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
+for name, color in zip(names, colors):
+    print (name + " ---> " + color ) 
+```
 
-    for name, color in zip(names, colors):
-        print (name + " ---> " + color ) 
+
+## Zip Lists
+```python
+products = ["Coat", "Jacket", "Shirt"]
+prices = [50, 30, 5]
+colors = ["white", "black", "magenta"]
+
+for (product, price, color) in zip(products, prices, colors):
+    print(f"{product} is {color} and costs ${price:.2f}")
+```
 
 
 ## Looping over List in sorted order
+```python
+colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
+for color in sorted(colors):
+    print(color)
 
-    colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
-    for color in sorted(colors):
-        print(color)
-
-    for color in sorted(colors, reverse=True):
-        print(color)
+for color in sorted(colors, reverse=True):
+    print(color)
+```
 
 
 ## Custom sort order
-    colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
-    def compare_length(c1, c2):
-        if len(c1) < len(c2):
-            return -1
-        if len(c1) > len(c2):
-            return 1
-        return 0
+```python
+colors = ['0. Red', '1. Green', '2. Blue', '3. Yellow']
+def compare_length(c1, c2):
+    if len(c1) < len(c2):
+        return -1
+    if len(c1) > len(c2):
+        return 1
+    return 0
 
-    print(sorted(colors, cmp=compare_length))
+print(sorted(colors, cmp=compare_length))
+```
 
 
 ## Remove char at specific index
-    string_to_check = "??blahblah123123123"
-    chars = ["?","a"]
+```python
+string_to_check = "??blahblah123123123"
+chars = ["?","a"]
 
-    def remove_at(i, s):
-        """
-            Remove char at specific index
-        """
-        return s[:i] + s[i+1:]
+def remove_at(i, s):
+    """
+        Remove char at specific index
+    """
+    return s[:i] + s[i+1:]
 
-    if string_to_check[0] in chars:
-        new = remove_at(0, string_to_check)
-        print(string_to_check)
-        print(new)
+if string_to_check[0] in chars:
+    new = remove_at(0, string_to_check)
+    print(string_to_check)
+    print(new)
 
-    else:
-        print("Nothing found")
+else:
+    print("Nothing found")
+```
 
 
 ## Appending functions to list
-    functions = []
-    for i in range(10):
-        functions.append(lambda i=i: i)
+```python
+functions = []
+for i in range(10):
+    functions.append(lambda i=i: i)
 
-    #print(*functions)
+#print(*functions)
 
-    for f in functions:
-        print(str(f()) + " " + str(f))
+for f in functions:
+    print(str(f()) + " " + str(f))
+```
 
 
 ## Tuples inside list
-    names = [('Anna', 1), ('Jenny', 2)]
-    for (name, id) in names:
-        print(name + " " + str(id))
+```python
+names = [('Anna', 1), ('Jenny', 2)]
+for (name, id) in names:
+    print(name + " " + str(id))
+```
 
 
 ## Using enumerate for loops (range) if you need an index
-    list = ["a", "b", "c", "d", "e"]
-    for index, element in enumerate(list):
-        print("index: {}, element: {}".format(index, element))
-index: 0, element: a
-index: 1, element: b
-index: 2, element: c
-index: 3, element: d
-index: 4, element: e
+```python
+list = ["a", "b", "c", "d", "e"]
+for index, element in enumerate(list):
+    print("index: {}, element: {}".format(index, element))
+# index: 0, element: a
+# index: 1, element: b
+# index: 2, element: c
+# index: 3, element: d
+# index: 4, element: e
+```
 
 
 ## Using enumerate for loops, count elements from 1
-    myList = ["a","b","c","d","e"]
-    for count, element in enumerate(myList, 1):
-        print(f"{count}) {element}")
+```python
+myList = ["a","b","c","d","e"]
+for count, element in enumerate(myList, 1):
+    print(f"{count}) {element}")
+```
 
 
 ## Using enumerate to replace
-    string = "abcdefghijk"
-    guid = 16 * ["-"]
-    # guid = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
-    for i, x in enumerate(string):
-        guid[i] = x # or conversion int(x)
+```python
+string = "abcdefghijk"
+guid = 16 * ["-"]
+# guid = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+for i, x in enumerate(string):
+    guid[i] = x # or conversion int(x)
 
-    print(guid)
-    # guid = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', '-', '-', '-', '-', '-']
+print(guid)
+# guid = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', '-', '-', '-', '-', '-']
+```
 
 
 ## Using f-strings (new in Python 3.6)
@@ -554,7 +576,7 @@ False
 True
 
 
-## Find all indexes    
+## Find all indexes
     def all_indices(value, list):
         indices = []
         idx = -1
@@ -842,21 +864,23 @@ print(isinstance(man1, Man))
 
 
 ## Reverse String
-    def reverse(s):
-        if len(s) == 0:
-            return s
-        else:
-            return reverse(s[1:]) + s[0]
-    s = "Hello"
-    print(reverse(s))
+```python
+def reverse(s):
+    if len(s) == 0:
+        return s
+    else:
+        return reverse(s[1:]) + s[0]
+s = "Hello"
+print(reverse(s))
 
-Notice that it's not just s[1:] + s[0], it's reverse(s[1:]) + s[0]. That means:
-reverse('hello') calls reverse('ello') and then adds the 'h',
-reverse('ello') calls reverse('llo') and then adds the 'e',
-reverse('llo') calls reverse('lo') and then adds the 'l',
-reverse('lo') calls reverse('o') and then adds the 'l',
-reverse('o') calls reverse('') and then adds the 'o',
-reverse('') returns '' because len('') == 0.
+# Notice that it's not just s[1:] + s[0], it's reverse(s[1:]) + s[0]. That means:
+# reverse('hello') calls reverse('ello') and then adds the 'h'
+# reverse('ello') calls reverse('llo') and then adds the 'e'
+# reverse('llo') calls reverse('lo') and then adds the 'l'
+# reverse('lo') calls reverse('o') and then adds the 'l'
+# reverse('o') calls reverse('') and then adds the 'o'
+# reverse('') returns '' because len('') == 0.
+```
 
 
 # Time
@@ -942,21 +966,20 @@ array([[ 1.,  1.,  1.,  1.],
 # SYS Library
 
 
-## SYS argv
+## Terminal SYS argv
 ```python
 import sys
 
-first_argument = sys.argv[1]
-second_argument = sys.argv[2]
-
-print(first_argument)
-print(second_argument)
+# using variable name _ by convention to note that we don't care about sys.argv[0] (name of our program)
+_, first_argument, second_argument = sys.argv
+print(f"filename:  {_}")
+print(f"first argument: {first_argument} second argument: {second_argument}")
 
 #>python argv.py a b
 ```
 
 
-## SYS Simple Loading
+## Terminal SYS Simple Loading
 ```python
 import time
 import sys
@@ -968,7 +991,7 @@ for x in range (0, 5):
 ```
 
 
-## SYS Simple Repeat Loading
+## Terminal SYS Simple Repeat Loading
 ```python
 import time
 import sys
@@ -982,7 +1005,7 @@ for x in range (0, 5):
 ```
 
 
-## SYS Counter
+## Terminal SYS Counter
 ```python
 import time
 import sys
@@ -1001,7 +1024,7 @@ while not Done:
 ```
 
 
-## SYS Flush two lines at the same time
+## Terminal SYS Flush two lines at the same time
 ```python
 import sys
 from random import randint
@@ -1021,7 +1044,7 @@ while True:
 ```
 
 
-## SYS Measuring elapsed time / timer
+## Terminal SYS Measuring elapsed time / timer
 ```python
 import time
 import sys
@@ -1040,7 +1063,7 @@ while not Done:
 ```
 
 
-## SYS Progress Bar
+## Terminal SYS Progress Bar
 ```python
 import time
 import sys
@@ -1060,7 +1083,7 @@ for i in xrange(toolbar_width):
 ```
 
 
-## SYS Progress Bar With Percentage
+## Terminal SYS Progress Bar With Percentage
 ```python
 from time import sleep
 import sys
@@ -1073,7 +1096,7 @@ for i in range(21):
 ```
 
 
-## SYS Spinning (rotating) Cursor
+## Terminal SYS Spinning (rotating) Cursor
 ```python
 import time
 import sys
