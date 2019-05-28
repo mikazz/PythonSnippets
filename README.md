@@ -363,7 +363,11 @@ else:
 # Lists
 
 
+## List Basics
 ```python
+list = []
+value = "value"
+
 # Insert Into The Beginning Of A List In Python
 list.insert(0, value)
 
@@ -375,6 +379,39 @@ list[index] = value
 
 # Concatenating Two Python Lists
 list_a += list_b
+```
+
+
+## List slicing
+```python
+list = [0, 1, 2, 3, 4 ,5, 6, 7, 8, 9]
+
+print("all after first")
+print(list[1:])
+
+print("all but last two")
+print(list[:-2])
+
+print("items with ends removed")
+print(list[1:-1])
+
+print("items reversed")
+print(list[::-1])
+
+print("the first two items, reversed")
+print(list[1::-1])
+
+print("the last two items, reversed")
+print(list[:-3:-1])
+
+print("everything except the last two items, reversed")
+print(list[-3::-1])
+
+print("all even indexes")
+print(list[::2])
+
+print("all odd indexes")
+print(list[::3])
 ```
 
 
