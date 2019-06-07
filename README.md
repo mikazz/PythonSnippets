@@ -84,56 +84,92 @@ or
 # OS
 
 
-## Manage file input
-    try:
-        with open("file.txt", "r") as file:
-            # Everyting
-            print (file.read())
+## Open file / Read file / Manage file input
+```python
+try:
+    with open("file.txt", "r") as file:
+        # Everyting
+        print (file.read())
 
-            # Line by line
-            print (file.readlines()) 
+        # Line by line
+        print (file.readlines()) 
 
-    except IOError:
-        print("File not found")
+except IOError:
+    print("File not found")
+```
+
+
+## Append to file
+```python
+with open("test.txt", "a") as file:
+    file.write("appended text")
+```
 
 
 ## Count character occurences in a file
-    f = open('file.csv','r')
-    for line in f:
-        counter = line.count('x')
-        if counter != 5:
-            print(line)
-        else:
-            pass
+```python
+f = open('file.csv','r')
+for line in f:
+    counter = line.count('x')
+    if counter != 5:
+        print(line)
+    else:
+        pass
+```
 
 
 ## Manage file input with OS
-    import os
+```python
+import os
 
-    def read(fname):
-        return open(os.path.join(os.path.dirname(__file__), fname)).read()
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-    print(read("C:\Users\username\Desktop\README.txt"))
+print(read("C:\Users\username\Desktop\README.txt"))
+```
 
 
 ## Recursive directory walk
-    import os
+```python
+import os
 
-    source = '/home/mike/Desktop/PYTHON/NAMED_RECOG/data'
+source = '/home/mike/Desktop/PYTHON/NAMED_RECOG/data'
 
-    for root, dirs, filenames in os.walk(source):
-        for f in filenames:
-            #print (f)
-            fullpath = os.path.join(source, f)
-            log = open(fullpath, 'r')
+for root, dirs, filenames in os.walk(source):
+    for f in filenames:
+        #print (f)
+        fullpath = os.path.join(source, f)
+        log = open(fullpath, 'r')
 
-            try:
-                with open(fullpath, "r") as file:
-                    raw = file.read()
-                    print(raw)
+        try:
+            with open(fullpath, "r") as file:
+                raw = file.read()
+                print(raw)
 
-            except IOError:
-                print("File not found")
+        except IOError:
+            print("File not found")
+```
+
+
+## Load multiple files
+```python
+import glob
+
+PATH = "HOTELS\*.txt"
+
+files = glob.glob(PATH)
+for name in files:
+    try:
+        with open(name) as file:
+            file_name = name.split('\\')
+            file_name = file_name[1]
+            print(file_name)
+            #content = file.read()
+            #print(content)
+        
+    except IOError as e:
+        print(e)
+```
 
 
 # Script Writing
@@ -141,24 +177,26 @@ or
 
 ## Verbose Mode
 
-Python 2.x
-    
-    if verbose:
-        def verboseprint(*args):
-            # Print each argument separately so caller doesn't need to
-            # stuff everything to be printed into a single string
-            for arg in args:
-               print arg,
-            print
-    else:   
-        verboseprint = lambda *a: None      # do-nothing function
-        
-Python 3.x
-    
-    verbose = True
-    vprint = print if verbose else lambda *a, **k: None
-    vprint("hello world")
+```python
+#Python 2.x
 
+if verbose:
+    def verboseprint(*args):
+        # Print each argument separately so caller doesn't need to
+        # stuff everything to be printed into a single string
+        for arg in args:
+           print arg,
+        print
+else:   
+    verboseprint = lambda *a: None      # do-nothing function
+
+
+#Python 3.x
+
+verbose = True
+vprint = print if verbose else lambda *a, **k: None
+vprint("hello world")
+```
 
 
 # Automate Testing
