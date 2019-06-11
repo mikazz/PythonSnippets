@@ -34,25 +34,29 @@ or
 
 
 ## Virtual environment python initialisation
-    virtualenv -p /usr/bin/python3 py3env
-    source py3env/bin/activate
-    pip install package-name
-    
-    
+```python
+virtualenv -p /usr/bin/python3 py3env
+source py3env/bin/activate
+pip install package-name
+```
+
+
 ## Configuration file for your project app
-    import os
+```python
+import os
 
-    def read(fname):
-        try:
-            return open(os.path.join(os.path.dirname(__file__), fname)).read()
-        except IOError:
-            return ''
+def read(fname):
+    try:
+        return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    except IOError:
+        return ''
 
-    configuration = [line for line in read('requirements.txt').split('\n')
-                            if line and not line.startswith('#')],
-    print(configuration)
-    
-    
+configuration = [line for line in read('requirements.txt').split('\n')
+                        if line and not line.startswith('#')],
+print(configuration)
+```
+
+
 ## Default setup script for modules / Setup.py
     from setuptools import setup
     import os
@@ -326,6 +330,14 @@ for key, value in dictionary.items():
 # or Access by key
 for key in dictionary:
     print(key + " ---> " + dictionary[key])
+```
+
+
+## Dictionary Comprehensions
+```python
+my_dict = {'a': [1, 2, 3], 'b': [4, 5, 6]}
+my_copy = {key: value[:] for key, value in my_dict.items()}
+print(my_copy)
 ```
 
 
@@ -605,40 +617,46 @@ print(guid)
 ```
 
 
-## Using f-strings (new in Python 3.6)
-    things = ["a", "b", "c", "d", "e"]
-    for i, thing in enumerate(things):
-        print(f"index: {i}, thing: {thing}".)
+## f-strings (new in Python 3.6)
+```python
+things = ["a", "b", "c", "d", "e"]
+for i, thing in enumerate(things):
+    print(f"index: {i}, thing: {thing}".)
+```
 
 
 ## List Flattening
-    nest = [[1, 2], [3, 4], [5, 6]]
-    
-Using chain
+```python
+nest = [[1, 2], [3, 4], [5, 6]]
 
-    >>> from itertools import chain
-    >>> list(chain.from_iterable(nest))
-    [1, 2, 3, 4, 5, 6]
+# Using chain
 
-Using sum
+from itertools import chain
+list(chain.from_iterable(nest))
+#[1, 2, 3, 4, 5, 6]
 
-    >>> sum(nest, [])
-    [1, 2, 3, 4, 5, 6]
+# Using sum
 
-Using List Comprehensions
+sum(nest, [])
+#[1, 2, 3, 4, 5, 6]
 
-    >>> [l for n in nest for l in n]
-    [1, 2, 3, 4, 5, 6]
+# Using List Comprehensions
+
+[l for n in nest for l in n]
+# [1, 2, 3, 4, 5, 6]
+```
 
 
 ## Check if all elements of a list matches a condition
-    items = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
-    all(item[0] == 1 for item in items)
-True
+```python
+items = [[1, 1, 1], [1, 2, 2], [1, 3, 3]]
+all(item[0] == 1 for item in items)
+# True
 
-    items = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
-    all(item == [1,1,1] for item in items)
-True
+items = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+all(item == [1,1,1] for item in items)
+# True
+```
 
 
 ## Check if at least one element of a list matches a condition
