@@ -839,6 +839,23 @@ print(get_attribute("fabs")(-1))
 ```
 
 
+## Decorator
+```python
+# Decorator is just a function that takes another function as an argument
+"""
+    @decorator
+    def func():
+        ...
+
+    expands to
+
+    def func():
+        ...
+    func = decorator(func)
+"""
+```
+
+
 # Classes
 
 
