@@ -405,6 +405,26 @@ print(vaporize("aesthetics"))
 ```
 
 
+## Parse Separated Values into Single Dictionary
+```python
+def parse_to_dictionary(text):
+    """
+        Parses inputs like:
+        variable : some value
+        variable2 : 123.44
+        into dict
+    """
+    return dict(
+        map(lambda kv: (kv[0].rstrip(), kv[1].lstrip()),
+            filter(
+                lambda l: len(l) == 2,
+                map(lambda l: l.split(':', 1),
+                    text.splitlines()))
+            )
+    )
+```
+
+
 # JSON
 
 
