@@ -428,45 +428,45 @@ def parse_to_dictionary(text):
 # JSON
 
 
-## Open, Edit, Close
+## Simple Open
+```python
+import json
+with open("secret.json") as f:
+    data = json.loads(f.read())
+```
+
+
+## Check if JSON contains key - Open, Edit, Close
 ```python
 import json
 import os
 
-#dict2 = {"127.0.0.1":"2018_09_01.txt",
-#        "127.0.0.2":"2018_09_02.txt",
-#        "127.0.0.3":"2018_09_03.txt"}
+#dict2 = {"127.0.0.1": "value",
+#        "127.0.0.2": "value",
+#        "127.0.0.3": "value"}
 
 dict = {}
-
 exists = os.path.isfile('dict.json')
+key = "127.0.0.4"
+
 if exists:
     print("File already exists")
     f = open("dict.json","r")
     dict = json.load(f)
 
-else:
-    pass
-
-# Get Value from given Key
-
-ip = "127.0.0.4"
-if ip in dict:
-    # open existing File (DATA) (Value) in append mode
-    x = dict[ip]
+if key in dict:
+    x = dict[key]
     print(x)
 
 else:
-    # create file and write data
-    print("Not found. Adding")
-
+    print("Not found. Adding key...")
+    # Open json file and add Key : Value
     with open('dict.json', 'r+') as f:
-        # Open json file and add Key : Value
         dict = json.load(f)
-        dict[ip] = "2018_09_04.txt" # <--- add 'id' value.
-        f.seek(0)        # <--- should reset file position to the beginning.
+        dict[key] = "value"           # <--- add value.
+        f.seek(0)                     # <--- should reset file position to the beginning.
         json.dump(dict, f, indent=4)
-        f.truncate()     # remove remaining part
+        f.truncate()                  # remove remaining part
 ```
 
 ## Access JSON record
@@ -879,7 +879,12 @@ print(get_attribute("fabs")(-1))
 ```
 
 
-## Decorator
+# Decorators
+
+
+## Simple decorator
+
+
 ```python
 # Decorator is just a function that takes another function as an argument
 """
@@ -893,6 +898,41 @@ print(get_attribute("fabs")(-1))
         ...
     func = decorator(func)
 """
+
+def get_function_name_dec(func):
+  def wrapper(*arg):
+      function_returns = func(*arg)  # What our function returns
+      return func.__name__ + ": " + function_returns
+
+  return wrapper
+
+@get_function_name_dec
+def hello_world():
+    return "Hi"
+
+print(hello_world())
+```
+
+
+## Decorator Measure elapsed time 
+```python
+import time
+
+def time_dec(func):
+  def wrapper(*arg):
+      start = time.time()
+      res = func(*arg)
+      print('%r %2.2f ms ' % (func.__name__, (time.time() - start) * 1000 ))
+      return res
+
+  return wrapper
+
+@time_dec
+def run(n, k):
+    return n**k
+
+print(run(2, 10000))
+print(run(2, 100000))
 ```
 
 
@@ -1086,71 +1126,59 @@ def epoch_to_dt(epoch):
 ## Converting an epoch time to a readable format:
 ```python
 print(str(time.strftime("%H:%M:%S", time.gmtime(1546599577) )))
-#10:59:37
+# 10:59:37
 
 print(str(time.strftime("%I:%M %p", time.gmtime(1546599577) )))
-#10:59 AM
+# 10:59 AM
 
 print(str(time.strftime("%d-%m-%Y %H:%M:%S", time.gmtime(1546599577) )))
-#04-01-2019 10:59:37
+# 04-01-2019 10:59:37
 
 print(str(time.strftime("%A %d-%m-%Y %H:%M:%S", time.gmtime(1546599577) )))
-#Friday 04-01-2019 10:59:37
+# Friday 04-01-2019 10:59:37
 
 print( datetime.datetime.fromtimestamp(float(1546599577099)/1000).strftime('%Y-%m-%d %H:%M:%S.%f') )
-#2019-01-04 11:59:37.099000
+# 2019-01-04 11:59:37.099000
 ```
-
-# Numpy
-
-
-## Create a length-10 integer array filled with zeros
-    import numpy as np
-    np.zeros(10, dtype=int)
-
-
-## Attributes of arrays
-    A = np.ones(shape=(3, 4), dtype=float)
-
-array([[ 1.,  1.,  1.,  1.],
-    [ 1.,  1.,  1.,  1.],
-    [ 1.,  1.,  1.,  1.]])
 
 
 # Matplotlib Library
 
 
 ## Basic Plot
+```python
+import matplotlib.pyplot as plt
 
-    import matplotlib.pyplot as plt
-
-    plt.plot([1, 2, 3, 2.5])
-    plt.ylabel('some numbers')
+plt.plot([1, 2, 3, 2.5])
+plt.ylabel('some numbers')
+```
 
 
 ## Customized basic plot
+```python
+import matplotlib.pyplot as plt
+# [x][y]
+plt.plot([1, 2, 3, 4], [10, 20, 25, 30], color='lightblue', linewidth=3)
+plt.scatter([1,2,3], [4,5,6], color='darkgreen', marker='^')
 
-    import matplotlib.pyplot as plt
-    # [x][y]
-    plt.plot([1, 2, 3, 4], [10, 20, 25, 30], color='lightblue', linewidth=3)
-    plt.scatter([1,2,3], [4,5,6], color='darkgreen', marker='^')
-
-    plt.xlim(0.5, 4.5)
-    plt.title("Title of the plot")
-    plt.xlabel("This is the x-label")
-    plt.ylabel("This is the y-label")
+plt.xlim(0.5, 4.5)
+plt.title("Title of the plot")
+plt.xlabel("This is the x-label")
+plt.ylabel("This is the y-label")
+```
 
 
 ## Generate data and plot
-    
-    import matplotlib.pyplot as plt
-    # np.linspace - Return evenly spaced numbers over a specified interval.
-    x = np.linspace(-np.pi, np.pi, 200)
-    sine = np.sin(x)
-    cosine = np.cos(x)
+```python
+import matplotlib.pyplot as plt
+# np.linspace - Return evenly spaced numbers over a specified interval.
+x = np.linspace(-np.pi, np.pi, 200)
+sine = np.sin(x)
+cosine = np.cos(x)
 
-    fig, ax = plt.subplots()
-    ax.plot(x, sine, x, cosine)
+fig, ax = plt.subplots()
+ax.plot(x, sine, x, cosine)
+```
 
 
 # SYS Library
@@ -1649,23 +1677,25 @@ Receiver
 
 ## Simple TCP Multithread Echo Client - Server
 Client
-    
-    import socket
 
-    HOST = "127.0.0.1"
-    PORT = 1337
+```python
+import socket
 
-    # Create an ipv4 (AF_INET) socket object using the tcp protocol (SOCK_STREAM)
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+HOST = "127.0.0.1"
+PORT = 1337
 
-    s.connect((HOST, PORT))
+# Create an ipv4 (AF_INET) socket object using the tcp protocol (SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    s.send('Hello World Echo')
+s.connect((HOST, PORT))
 
-    # 4096 is recommended buffer size
-    response = s.recv(4096)
+s.send('Hello World Echo')
 
-    print(response)
+# 4096 is recommended buffer size
+response = s.recv(4096)
+
+print(response)
+```
 
 Server
 
