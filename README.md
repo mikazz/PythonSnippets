@@ -1,6 +1,7 @@
 # PythonSnippets
 Collection of python code snippets
 
+http://users.uj.edu.pl/~ufkapano/algorytmy/lekcja04/
 
 ## Bash getting in the directory where the module is defined
 Put it in your .bashrc or .bash_profile and do cdp <python module name> to get in the directory where the module is defined.: 
