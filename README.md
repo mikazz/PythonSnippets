@@ -469,6 +469,26 @@ else:
         f.truncate()     # remove remaining part
 ```
 
+## Access JSON record
+```python
+
+data = {
+    'customer': {
+        'salutation': "mr",
+        'first_name': "John",
+        'last_name': "Doe",
+        'email': "john@example.com",
+        'plugin_id': "1",
+        'plugin_order': "1",
+    },
+}
+
+print(data['customer']['salutation'])
+print(data['customer']['first_name'])
+print(data['customer']['last_name'])
+print(data['customer']['email'])
+```
+
 
 # Lists
 
