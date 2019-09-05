@@ -1515,7 +1515,7 @@ loop.close()
 
 ## Simple UDP Client - Server
 ```python
-#Client
+# Client
 
 import socket
 
@@ -1531,7 +1531,7 @@ s.send('Hello World 3')
 ```
 
 ```python
-#Server
+# Server
 
 import socket
 
