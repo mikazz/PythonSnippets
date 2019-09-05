@@ -1,6 +1,7 @@
 # PythonSnippets
 Collection of python code snippets
 
+http://users.uj.edu.pl/~ufkapano/algorytmy/lekcja04/
 
 ## Bash getting in the directory where the module is defined
 Put it in your .bashrc or .bash_profile and do cdp <python module name> to get in the directory where the module is defined.: 
@@ -879,12 +880,54 @@ print(get_attribute("fabs")(-1))
 ```
 
 
+# Lambdas
+
+
+## Do lambda mozna przyporządkować nazwę.
+func1 = lambda x, y, z: x + y + z
+print func1(2, 3, 4)
+
+def func1(x, y, z):            # równoważna funkcja
+    return x + y + z
+
+
+# W argumentach lambda można uzywac argumentow domyslnych.
+func2 = (lambda x=0, y=0, z=0: x + y + z)
+print func2(4, 5)
+
+
+# Lambda można stosować w funkcji map().
+map(lambda x: 2*x+1, range(9))
+[2*x+1 for x in range(9)]     # lista składana
+
+
+# Z lambda można budować listę lub słownik.
+action = {
+"jeden": lambda x: x,
+"dwa": lambda x: x**2,
+"trzy": lambda x: x**3
+}
+print action["dwa"](10)       # pow(10, 2) = 100
+
+powers = [
+lambda x : 1,
+lambda x: x, 
+lambda x: pow(x, 2), 
+lambda x: pow(x, 3)
+]
+print powers[2](3)            # pow(3, 2) = 9
+
+
+# Zastosowanie logiki wyboru.
+lambda_abs = lambda x: -x if x < 0 else x
+lambda_min = lambda x, y: x if x < y else y
+lambda_max = lambda x, y: x if x > y else y
+
+
 # Decorators
 
 
 ## Simple decorator
-
-
 ```python
 # Decorator is just a function that takes another function as an argument
 """
@@ -960,8 +1003,6 @@ my_dog.sit()
 
 
 ## Properties vs. Getters and Setters
-
-
 ```python
 from random import randint
 
@@ -1051,8 +1092,6 @@ class Pizza:
 
 
 ## Class method works and inheritance
-
-
 ```python
 from datetime import date
 
