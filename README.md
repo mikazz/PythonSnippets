@@ -362,6 +362,26 @@ for key in dictionary:
 ```
 
 
+## Access records
+```python
+data = {
+    'customer': {
+        'salutation': "mr",
+        'first_name': "John",
+        'last_name': "Doe",
+        'email': "john@example.com",
+        'plugin_id': "1",
+        'plugin_order': "1",
+    },
+}
+
+print(data['customer']['salutation'])
+print(data['customer']['first_name'])
+print(data['customer']['last_name'])
+print(data['customer']['email'])
+```
+
+
 ## Looping over dictionary keys and values
 ```python
 dictionary = {'matthew':'blue', 'rachel':'green', 'raymond':'red'}
@@ -468,26 +488,6 @@ else:
         f.seek(0)                     # <--- should reset file position to the beginning.
         json.dump(dict, f, indent=4)
         f.truncate()                  # remove remaining part
-```
-
-## Access JSON record
-```python
-
-data = {
-    'customer': {
-        'salutation': "mr",
-        'first_name': "John",
-        'last_name': "Doe",
-        'email': "john@example.com",
-        'plugin_id': "1",
-        'plugin_order': "1",
-    },
-}
-
-print(data['customer']['salutation'])
-print(data['customer']['first_name'])
-print(data['customer']['last_name'])
-print(data['customer']['email'])
 ```
 
 
@@ -868,7 +868,7 @@ print(result)
 import math
 
 def get_attribute(attribute):
-    # Check if function has attribute
+    # Check if function has an attribute
     if hasattr(math, attribute):
         # Return module.attribute
         return eval("math." + attribute)
@@ -883,45 +883,66 @@ print(get_attribute("fabs")(-1))
 # Lambdas
 
 
-## Do lambda mozna przyporządkować nazwę.
+## Assign Name to lambda
+```python
 func1 = lambda x, y, z: x + y + z
-print func1(2, 3, 4)
+print(func1(2, 3, 4))
 
-def func1(x, y, z):            # równoważna funkcja
+# same as
+
+def func1(x, y, z):
     return x + y + z
+```
 
 
-# W argumentach lambda można uzywac argumentow domyslnych.
+# Default argument in lambda
+```python
 func2 = (lambda x=0, y=0, z=0: x + y + z)
-print func2(4, 5)
+print(func2(4, 5))
+```
 
 
-# Lambda można stosować w funkcji map().
-map(lambda x: 2*x+1, range(9))
-[2*x+1 for x in range(9)]     # lista składana
+# Use lambda in map()
+```python
+my_list = map(lambda x: 2*x+1, range(9))
+print(", ".join(str(i) for i in my_list))
 
+my_list = [2*x+1 for x in range(9)]
+print(my_list)
+```
 
-# Z lambda można budować listę lub słownik.
+# Build dictionary or list with lambda
+```python
+# dictionary
 action = {
-"jeden": lambda x: x,
-"dwa": lambda x: x**2,
-"trzy": lambda x: x**3
+"one": lambda x: x,
+"two": lambda x: x**2,
+"three": lambda x: x**3
 }
-print action["dwa"](10)       # pow(10, 2) = 100
+print(action["two"](10))  # pow(10, 2) = 100
 
+# list
 powers = [
 lambda x : 1,
 lambda x: x, 
 lambda x: pow(x, 2), 
 lambda x: pow(x, 3)
 ]
-print powers[2](3)            # pow(3, 2) = 9
+print(powers[2](3))  # pow(3, 2) = 9
+
+```
 
 
-# Zastosowanie logiki wyboru.
+# Lambda Choice logic
+```python
 lambda_abs = lambda x: -x if x < 0 else x
 lambda_min = lambda x, y: x if x < y else y
 lambda_max = lambda x, y: x if x > y else y
+
+print(lambda_abs(-1))
+print(lambda_min(2, 1))
+print(lambda_max(2, 1))
+```
 
 
 # Decorators
@@ -1129,7 +1150,56 @@ print(isinstance(man1, Man))
 ```
 
 
+## Class __str__ vs __repr__
+```python
+class Time:
+    def __init__(self, seconds=0):
+        self.s = seconds
+
+    def __str__(self):
+        """If there is no str method, repr will be used in this place"""
+        return "%s sec" % self.s
+
+    def __repr__(self):
+        """reproducts the object"""
+        return "Time(%s)" % self.s
+
+time1 = Time(12)
+time2 = Time(3456)
+
+print(time1, time2)      # Execute str()
+print([time1, time2])    # Execute repr() (list)
+print({time1, time2})    # Execute repr() (set)
+```
+
+
 # Recursion
+
+
+## Recursively printing n lines with an asterisk
+```python
+def print_stars(n):
+    if n > 0:
+        print("*")
+        print_stars(n-1)
+
+print_stars(5)
+```
+
+
+## Recursive calculation of the factorial function n!
+```python
+# 0! = 1, 1! = 1, n! = n*(n-1)!
+
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+import math
+print (math.factorial(10) == factorial(10))
+```
 
 
 ## Reverse String
