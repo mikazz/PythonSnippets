@@ -546,6 +546,17 @@ print(list[::3])
 ```
 
 
+## Detect If Item is the Last in a List
+```python
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 56]
+
+my_list_len = len(my_list)-1
+for index, x in enumerate(my_list):
+    if index == my_list_len:
+        print("Last is: " + str(x))
+```
+
+
 ## List Difference / Remove from List A values from List B
 ```python
 A = [1, 2, 3, 4, 5]
