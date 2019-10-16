@@ -491,6 +491,38 @@ else:
 ```
 
 
+# XML
+
+
+## Parse XML File
+```python
+xml = """<root>
+            <Sprawa>
+                <PrzebiegSprawy>
+                    <Czynnosc>
+                        <DataCzynnosci>2018-09-03</DataCzynnosci>
+                    </Czynnosc>
+                </PrzebiegSprawy>
+            </Sprawa>
+
+            <Sprawa>
+                <PrzebiegSprawy>
+                    <Czynnosc>
+                        <DataCzynnosci>2018-09-04</DataCzynnosci>
+                    </Czynnosc>
+                </PrzebiegSprawy>
+            </Sprawa>
+        </root>"""
+
+import xml.etree.ElementTree as ET
+root = ET.fromstring(xml)
+for sprawa in root.findall('Sprawa'):
+    data_sprawy = sprawa.find('./PrzebiegSprawy/Czynnosc/DataCzynnosci')
+    print(data_sprawy.text)
+        
+```
+
+
 # Lists
 
 
