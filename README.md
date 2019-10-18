@@ -86,49 +86,58 @@ print(configuration)
 
 
 ## Dictionary comprehensions
+```python
 {key:value for key, value in [[1,2],[3,4],[5,6]]}
+```
 
 
 ## Generator expression/comprehension
+```python
 gen = (item for item in (1, 2, 3))
 next(gen)
 next(gen)
 next(gen)
+```
 
 
 ## Open file with generator
+```python
 csv_gen = (row for row in open('file_name.txt'))
 next(csv_gen)
+```
 
 
 ## String concatenation
+```python
 '\n'.join(['some', 'comma', 'separated', 'values'])
+```
 
 
 ## Enumerate List comprehension
+```python
 [(i, j) for i, j in enumerate(["one", "two", "three"])]
+```
 
 
 ## Reverse String but skip
+```python
 gen = (t for t in reversed("abcdef") if t not in "a")
+```
 
 
 ## Reverse String but skip
+```python
 string = "abcdef"
 parameter = "a"
 generator = (t for t in reversed(string) if t not in parameter)
 ''.join(t if t in parameter else next(generator) for t in string)
-
-
-''.join(t if t in parameter for t in string)
+```
 
 
 ## Lambda FizzBuzz
+```python
 map(lambda i: "Fizz"*(i%3==0)+"Buzz"*(i%5==0) or str(i), range(1,101))
-
-
-map(lambda i: "Done"*(i%2==0), range(10))
-
+```
 
 
 # OS
@@ -1089,6 +1098,30 @@ def run(n, k):
 print(run(2, 10000))
 print(run(2, 100000))
 ```
+
+
+## Parametrizing decorators
+def repeat(number=3):
+    """Cause decorated function to be repeated a number of times.
+    Last value of original function call is returned as a result
+    :param number: number of repetitions, 3 if not specified
+    """
+    def actual_decorator(function):
+        def wrapper(*args, **kwargs):
+            result = None
+            for _ in range(number):
+                result = function(*args, **kwargs)
+            return result
+        return wrapper
+    return actual_decorator
+
+@repeat()
+def foo():
+    print("foo")
+
+foo()
+
+
 
 
 # Classes
