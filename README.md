@@ -58,32 +58,77 @@ print(configuration)
 ```
 
 
-## Default setup script for modules / Setup.py
-    from setuptools import setup
-    import os
-    def read(fname):
-        return open(os.path.join(os.path.dirname(__file__), fname)).read()
-    setup(
-        name = "Project Name",
-        version = "0.0.1",
-        author = "Author",
-        author_email = "author@mail.com",
-        description = ("python module"),
-        license = "GPLv2",
-        keywords = "keyword1 keyword2",
-        url = "www.project.com",
-        packages=['vapeplot'],
-        package_dir={'vapeplot':'vapeplot'},
-        
-        long_description=read('README.md'),
-        include_package_data=True,
-        install_requires=['matplotlib'],
-        classifiers=[
-            'Development Status :: 3 - Alpha',
-            'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
-            'Topic :: Multimedia :: Graphics',
-        ],
-    )
+# Statements
+
+
+## List comprehensions
+```python
+[i for i in range(10) if i % 2 == 0]
+```
+
+
+## Zip List comprehensions
+```python
+[item for item in zip([1, 2, 3], [4, 5, 6])]
+```
+
+
+## Results of zip() can be reversed by another zip()
+```python
+[item for item in zip(*zip([1, 2, 3], [4, 5, 6]))]
+```
+
+
+## Set comprehensions
+```python
+{item for item in iterable if condition}
+```
+
+
+## Dictionary comprehensions
+{key:value for key, value in [[1,2],[3,4],[5,6]]}
+
+
+## Generator expression/comprehension
+gen = (item for item in (1, 2, 3))
+next(gen)
+next(gen)
+next(gen)
+
+
+## Open file with generator
+csv_gen = (row for row in open('file_name.txt'))
+next(csv_gen)
+
+
+## String concatenation
+'\n'.join(['some', 'comma', 'separated', 'values'])
+
+
+## Enumerate List comprehension
+[(i, j) for i, j in enumerate(["one", "two", "three"])]
+
+
+## Reverse String but skip
+gen = (t for t in reversed("abcdef") if t not in "a")
+
+
+## Reverse String but skip
+string = "abcdef"
+parameter = "a"
+generator = (t for t in reversed(string) if t not in parameter)
+''.join(t if t in parameter else next(generator) for t in string)
+
+
+''.join(t if t in parameter for t in string)
+
+
+## Lambda FizzBuzz
+map(lambda i: "Fizz"*(i%3==0)+"Buzz"*(i%5==0) or str(i), range(1,101))
+
+
+map(lambda i: "Done"*(i%2==0), range(10))
+
 
 
 # OS
@@ -137,22 +182,25 @@ print(read("C:\Users\username\Desktop\README.txt"))
 ## Recursive directory walk
 ```python
 import os
+import sys
 
-source = '/home/mike/Desktop/PYTHON/NAMED_RECOG/data'
+print('walk_dir = ' + walk_dir)
+print('walk_dir (absolute) = ' + os.path.abspath(walk_dir))
 
-for root, dirs, filenames in os.walk(source):
-    for f in filenames:
-        #print (f)
-        fullpath = os.path.join(source, f)
-        log = open(fullpath, 'r')
+for root, subdirs, files in os.walk(walk_dir):
+    print('--\nroot = ' + root)
+    print('list_file_path = ' + list_file_path)
+    for subdir in subdirs:
+        print('\t- subdirectory ' + subdir)
 
-        try:
-            with open(fullpath, "r") as file:
-                raw = file.read()
-                print(raw)
+    for file_name in files:
+        file_path = os.path.join(root, file_name)
 
-        except IOError:
-            print("File not found")
+        print('\t- file %s (full path: %s)' % (file_name, file_path))
+
+        with open(file_path, 'rb') as file:
+            file_content = file.read()
+            print(file_content)
 ```
 
 
