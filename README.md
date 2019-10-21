@@ -125,10 +125,10 @@ gen = (t for t in reversed("abcdef") if t not in "a")
 ```
 
 
-## Reverse String but skip
+## Reverse String but skip given char
 ```python
 string = "abcdef"
-parameter = "a"
+parameter = "a"  #  Skip reversing
 generator = (t for t in reversed(string) if t not in parameter)
 ''.join(t if t in parameter else next(generator) for t in string)
 ```
