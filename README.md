@@ -390,6 +390,34 @@ print( "hello" * False )
 ```
 
 
+# Numbers
+
+
+## Binary Number tricks
+```python
+num = 21
+
+# 0x hexadecimal (base 16) Notification
+'{:0x}'.format(num)  # '15'
+print(0x15)
+
+# Octal
+'{:0o}'.format(num)  # '25'
+
+# Binary
+'{:016b}'.format(num)  # '0000000000010101'
+
+# Binary Reversed
+'{:016b}'.format(num)[::-1]  # '1010100000000000'
+
+# Convert to numbers, by providing the expected base (16 for hexadecimal numbers)
+int("12ef", 16)
+
+# XOR hex numbers 'ABCD' to '12EF'. answer = B922
+hex(int("12ef", 16) ^ int("abcd", 16))
+```
+
+
 # Dictionaries
 
 
