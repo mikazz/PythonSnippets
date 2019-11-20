@@ -1776,7 +1776,7 @@ loop.close()
 
 ## Simple UDP Client - Server
 ```python
-# Client
+# UDP Client
 
 import socket
 
@@ -1791,8 +1791,9 @@ s.send('Hello World 2')
 s.send('Hello World 3')
 ```
 
+
 ```python
-# Server
+# UDP Server
 
 import socket
 
@@ -1810,130 +1811,178 @@ while True:
 ```
 
 
-## Send file via UDP
-Sender
+## Simple TCP Client - Server
+```python
+# TCP Client
 
-    import socket
-    import sys
+import socket
 
-    HOST = '127.0.0.1'
-    PORT = 9999
-    BUFF = 1024
-    file_name = 'test.txt'
+HOST = '127.0.0.1'
+PORT = 12345
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    addr = (HOST, PORT)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+sock.connect(HOST, PORT)  
 
-    s.sendto(file_name, addr)
+sock.send(b"Hello World from Client")  
 
-    f = open(file_name,"rb")
-    data = f.read(BUFF)
-    while (data):
-        if(s.sendto(data, addr)):
-            print("Sending ...")
-            data = f.read(BUFF)
-    s.close()
-    f.close()
+print(sock.recv(1024))
+sock.close()
+```
 
-Receiver
+```python
+# TCP Server
 
-    import socket
-    import select
+import socket
 
-    HOST = "127.0.0.1" #  UDP_IP
-    PORT = 5005 #  IN_PORT 
-    timeout = 3
+HOST = '127.0.0.1'
+PORT = 12345
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((HOST, PORT))
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+sock.bind(HOST, PORT)
+sock.listen(5)
 
-    while True:
-        data, addr = sock.recvfrom(1024)
-        if data:
-            print "File name:", data
-            file_name = data.strip()
-
-        f = open(file_name, 'wb')
-
-        while True:
-            ready = select.select([sock], [], [], timeout)
-            if ready[0]:
-                data, addr = sock.recvfrom(1024)
-                f.write(data)
-            else:
-                print "%s Finish!" % file_name
-                f.close()
-                break
-
-## Send File via TCP
-Sender
-
-    import socket
-    import sys
-
-    TCP_IP = "127.0.0.1"
-    FILE_PORT = 5005
-    DATA_PORT = 5006
-    buf = 1024
-    file_name = sys.argv[1]
+print("Server is running...")
+while True:
+    connection, address = sock.accept()  
+    buf = connection.recv(1024)  
+    print(buf)
+    connection.send(buf)    		
+    connection.close()
+```
 
 
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((TCP_IP, FILE_PORT))
-        sock.send(file_name)
-        sock.close()
+## Send File Via UDP
+```python
+# Sender
 
-        print "Sending %s ..." % file_name
+import socket
+import sys
 
-        f = open(file_name, "rb")
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((TCP_IP, DATA_PORT))
-        data = f.read()
-        sock.send(data)
+HOST = '127.0.0.1'
+PORT = 9999
+BUFF = 1024
+file_name = 'test.txt'
 
-    finally:
-        sock.close()
-    f.close()
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+addr = (HOST, PORT)
 
-Receiver
+s.sendto(file_name, addr)
 
-    import socket
+f = open(file_name,"rb")
+data = f.read(BUFF)
+while (data):
+    if(s.sendto(data, addr)):
+        print("Sending ...")
+        data = f.read(BUFF)
+s.close()
+f.close()
+```
 
-    TCP_IP = "127.0.0.1"
-    FILE_PORT = 5005
-    DATA_PORT = 5006
-    timeout = 3
-    buf = 1024
+# Receiver
+```python
+import socket
+import select
 
+HOST = "127.0.0.1" #  UDP_IP
+PORT = 5005 #  IN_PORT 
+timeout = 3
 
-    sock_f = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock_f.bind((TCP_IP, FILE_PORT))
-    sock_f.listen(1)
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((HOST, PORT))
 
-    sock_d = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock_d.bind((TCP_IP, DATA_PORT))
-    sock_d.listen(1)
+while True:
+    data, addr = sock.recvfrom(1024)
+    if data:
+        print "File name:", data
+        file_name = data.strip()
 
+    f = open(file_name, 'wb')
 
     while True:
-        conn, addr = sock_f.accept()
-        data = conn.recv(buf)
-        if data:
-            print "File name:", data
-            file_name = data.strip()
-
-        f = open(file_name, 'wb')
-
-        conn, addr = sock_d.accept()
-        while True:
-            data = conn.recv(buf)
-            if not data:
-                break
+        ready = select.select([sock], [], [], timeout)
+        if ready[0]:
+            data, addr = sock.recvfrom(1024)
             f.write(data)
+        else:
+            print "%s Finish!" % file_name
+            f.close()
+            break
+```
 
-        print "%s Finish!" % file_name
-        f.close()
+
+## Send File Via TCP
+```python
+# Sender
+
+import socket
+
+TCP_IP = "127.0.0.1"
+FILE_PORT = 5005
+DATA_PORT = 5006
+buf = 1024
+file_name = "picture.png"
+
+
+try:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((TCP_IP, FILE_PORT))
+    sock.send(file_name)
+    sock.close()
+
+    print(f"Sending {file_name}...")
+
+    f = open(file_name, "rb")
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((TCP_IP, DATA_PORT))
+    data = f.read()
+    sock.send(data)
+
+finally:
+    sock.close()
+f.close()
+```
+
+
+```python
+# Receiver
+
+import socket
+
+TCP_IP = "127.0.0.1"
+FILE_PORT = 5005
+DATA_PORT = 5006
+timeout = 3
+buf = 1024
+
+
+sock_f = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock_f.bind((TCP_IP, FILE_PORT))
+sock_f.listen(1)
+
+sock_d = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock_d.bind((TCP_IP, DATA_PORT))
+sock_d.listen(1)
+
+
+while True:
+    conn, addr = sock_f.accept()
+    data = conn.recv(buf)
+    if data:
+        print(f"File name: {data}")
+        file_name = data.strip()
+
+    f = open(file_name, 'wb')
+
+    conn, addr = sock_d.accept()
+    while True:
+        data = conn.recv(buf)
+        if not data:
+            break
+        f.write(data)
+
+    print(f"Finish! {file_name}")
+    f.close()
+```
 
 
 ## Simple TCP Multithread Echo Client - Server
