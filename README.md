@@ -143,6 +143,21 @@ map(lambda i: "Fizz"*(i%3==0)+"Buzz"*(i%5==0) or str(i), range(1,101))
 # OS
 
 
+## Add to Path
+```python
+import os
+import sys
+
+d = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.realpath(os.path.join(d, 'gen/')))
+sys.path.append(os.path.realpath(os.path.join(d, 'gen/one')))
+sys.path.append(os.path.realpath(os.path.join(d, 'gen/two')))
+
+print(d)
+print('\n'.join(str(item) for item in sys.path))
+```
+
+
 ## Open file / Read file / Manage file input
 ```python
 try:
