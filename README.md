@@ -1835,13 +1835,15 @@ import socket
 HOST = '127.0.0.1'
 PORT = 12345
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-sock.connect(HOST, PORT)  
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+s.connect(HOST, PORT)  
 
-sock.send(b"Hello World from Client")  
+s.send(b"Hello World from Client")  
 
-print(sock.recv(1024))
-sock.close()
+data, addr = s.recvfrom(1024)
+print(data)
+print(addr) # client PORT and HOST
+s.close()
 ```
 
 ```python
@@ -1852,16 +1854,16 @@ import socket
 HOST = '127.0.0.1'
 PORT = 12345
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-sock.bind(HOST, PORT)
-sock.listen(5)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+s.bind((HOST, PORT))
+s.listen(5)
 
 print("Server is running...")
 while True:
-    connection, address = sock.accept()  
-    buf = connection.recv(1024)  
+    connection, address = s.accept()
+    buf = connection.recv(1024)
     print(buf)
-    connection.send(buf)    		
+    connection.send(buf)
     connection.close()
 ```
 
@@ -1898,8 +1900,8 @@ f.close()
 import socket
 import select
 
-HOST = "127.0.0.1" #  UDP_IP
-PORT = 5005 #  IN_PORT 
+HOST = "127.0.0.1"  # UDP_IP
+PORT = 5005  # IN_PORT 
 timeout = 3
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -2023,43 +2025,51 @@ print(response)
 ```
 
 Server
+```python
+import socket
+import thread
 
-    from socket import *
-    import thread
+HOST = '127.0.0.1'
+PORT = 5555
+BUFF = 64 * 1024
 
-    HOST = '127.0.0.1'
-    PORT = 9999
-    BUFF = 1024
-    
-    def response(key):
-        return 'Server response: ' + key
 
-    def handler(s_client,addr):
-        while True:
-            data = s_client.recv(BUFF)
-            if not data: break
+def response(key):
+    return 'Server response: ' + key
 
-            print repr(addr) + ' recv:' + repr(data)
-            s_client.send(response(data))
 
-            print repr(addr) + ' sent:' + repr(response(data))
+def handler(s_client, addr):
+    while True:
+        data = s_client.recv(BUFF)
+        if not data: break
 
-            if "close" == data.rstrip(): break # type 'close' on client console to close connection from the server side
+        print(repr(addr) + ' recv:' + repr(data))
+        s_client.send(response(data))
 
-        s_client.close()
-        print(str(addr) + "- closed connection")
+        print(repr(addr) + ' sent:' + repr(response(data)))
 
-    if __name__=='__main__':
-        ADDR = (HOST, PORT)
-        s_server = socket(AF_INET, SOCK_STREAM)
-        s_server.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-        s_server.bind(ADDR)
-        s_server.listen(5)
-        while True:
-            print('Waiting for connection... listening on port: ' + str(PORT))
-            s_client, addr = s_server.accept()
-            print('...connected from: ' + str(addr))
-            thread.start_new_thread(handler, (s_client, addr))
+        if "close" == data.rstrip():
+            # type 'close' on client console to close connection from the server side
+            break
+
+
+    s_client.close()
+    print(str(addr) + "- closed connection")
+
+
+if __name__=='__main__':
+    ADDR = (HOST, PORT)
+    s_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s_server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    s_server.bind(ADDR)
+    s_server.listen(5)
+    while True:
+        print('Waiting for connection... listening on port: ' + str(PORT))
+        s_client, addr = s_server.accept()
+        print('...connected from: ' + str(addr))
+        thread.start_new_thread(handler, (s_client, addr))
+```
+
 
 # Selenium
 
