@@ -1170,6 +1170,18 @@ foo()
 # Classes
 
 
+## Basic Class
+```python
+class Main:
+    def __init__(self, index, name):
+        self.name = name
+        self.index = index
+
+if __name__ == "__main__":
+    main = Main(1, "One")
+```
+
+
 ## Simple class
 ```python
 class Dog():
