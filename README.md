@@ -5,34 +5,43 @@ http://users.uj.edu.pl/~ufkapano/algorytmy/lekcja04/
 
 ## Bash getting in the directory where the module is defined
 Put it in your .bashrc or .bash_profile and do cdp <python module name> to get in the directory where the module is defined.: 
-equals: 
-print(os.path.dirname(os.path.realpath(__file__[:-1])))
 
-    cdp () {
-        cd "$(python -c "import os.path as _, ${1}; \
-                print(_.dirname(_.realpath(${1}.__file__[:-1])))"
-            )"
-    }
+```python
+cdp () {
+    cd "$(python -c "import os.path as _, ${1}; \
+            print(_.dirname(_.realpath(${1}.__file__[:-1])))"
+        )"
+}
+```
 
- This work:
- 
-     ~ $ cdp os
-    /usr/lib/python2.7 $
+This work:
 
-    ~ $ cdp os.path
-    /usr/lib/python2.7 $
+```python
+ ~ $ cdp os
+/usr/lib/python2.7 $
 
+~ $ cdp os.path
+/usr/lib/python2.7 $
+```
 
-## Basic bash executing
-    #!/usr/bin/python3
-   
+Equals in python:  i.e rq module
+```python
+>>> import os.path as _, rq
+>>> print(_.dirname(_.realpath(rq.__file__[:-1])))
+# C:\Python374\lib\site-packages\rq
+```
+
+## Bash executing
+```python
+#!/usr/bin/python3
+```
 With Python 3, all strings will be Unicode strings, so the original encoding of the source will have no impact at run-time
-    
-    # -*- coding: utf-8 -*-
+
+```python
+# -*- coding: utf-8 -*-
 or
-
-    # coding: utf8
-
+# coding: utf8
+```
 
 ## Virtual environment python initialisation
 ```python
