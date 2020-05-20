@@ -2092,26 +2092,75 @@ if __name__=='__main__':
 ```
 
 
+## pymongo for Mongo Databse
+
+
+```python
+from pymongo import MongoClient
+import pprint
+
+# Connecting to MongoDB
+client = MongoClient('localhost', 27017)
+
+# Getting a Database
+db = client['ddfff']
+
+# Create Collection.
+if not db['jobs_collection']:
+    db.create_collection("jobs_collection")
+    print(f"Creating Collection: jobs_collection")
+else:
+    jobs_collection = db['jobs_collection']
+    print(f"Already exist Collection: jobs_collection")
+
+# Create Collection
+if not db['result_collection']:
+    db.create_collection("result_collection")
+    print(f"Creating Collection: result_collection")
+else:
+    result_collection = db['result_collection']
+    print(f"Already exist Collection: result_collection")
+
+
+# Show all collections. It will return [] If nothing was inserted!
+print(db.list_collection_names())
+
+# Inserting post
+post = {"name":"bill", "data":"empty"}
+print(jobs_collection.insert_one(post))
+
+# Query
+q = jobs_collection.find_one({"name" : "bill"})
+print(q)
+
+# Query like:
+q = jobs_collection.find({"name" : "bill"})
+#'\n'.join('{} : {}'.format(key, value) for key, value in q.items())
+
+q = jobs_collection.find_one({"key" : directory_name})
+```
+
+
 # Selenium
 
-    #!/usr/bin/python3
+#!/usr/bin/python3
 
-    from selenium import webdriver
-    import os
+from selenium import webdriver
+import os
 
-    #driver loc on disk
-    abs_driver = os.path.abspath('/driver/chromedriver')
-    ChromeDriverPath = abs_driver
+#driver loc on disk
+abs_driver = os.path.abspath('/driver/chromedriver')
+ChromeDriverPath = abs_driver
 
-    option = webdriver.ChromeOptions()
-    ##option.add_argument("-incognito")
-    ##option.add_argument("--start-maximized")
-    driver = webdriver.Chrome(executable_path=ChromeDriverPath, chrome_options=option)
+option = webdriver.ChromeOptions()
+##option.add_argument("-incognito")
+##option.add_argument("--start-maximized")
+driver = webdriver.Chrome(executable_path=ChromeDriverPath, chrome_options=option)
 
-    driver.set_window_size(1500, 950)
+driver.set_window_size(1500, 950)
 
-    driver.get("https://www.site.com/user/login")
+driver.get("https://www.site.com/user/login")
 
-    html_addres = driver.current_url
-    print(html_addres)
+html_addres = driver.current_url
+print(html_addres)
 
