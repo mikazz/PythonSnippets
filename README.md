@@ -100,6 +100,14 @@ print(configuration)
 ```
 
 
+## List comprehensions with index
+```python
+a = [1, 2, 3, 4, 5]
+# [i for (i, x) in enumerate(a)]
+" ".join([f"{x} [{i}]" for (i, x) in enumerate(a)])
+```
+
+
 ## Generator expression/comprehension
 ```python
 gen = (item for item in (1, 2, 3))
@@ -113,6 +121,20 @@ next(gen)
 ```python
 csv_gen = (row for row in open('file_name.txt'))
 next(csv_gen)
+```
+
+
+## Count file lines with generator
+```python
+def count_file_lines(file_name):
+    csv_gen = (row for row in open(file_name))
+    row_count = 0
+    for row in csv_gen:
+        row_count += 1
+
+    return row_count
+
+count_file_lines("file.txt")
 ```
 
 
@@ -859,24 +881,49 @@ for i, thing in enumerate(things):
 
 
 ## List Flattening
+Using chain
+
+```python
+from itertools import chain
+nest = [[1, 2], [3, 4], [5, 6]]
+list(chain.from_iterable(nest))
+# [1, 2, 3, 4, 5, 6]
+```
+
+Using sum
+
 ```python
 nest = [[1, 2], [3, 4], [5, 6]]
-
-# Using chain
-
-from itertools import chain
-list(chain.from_iterable(nest))
-#[1, 2, 3, 4, 5, 6]
-
-# Using sum
-
 sum(nest, [])
-#[1, 2, 3, 4, 5, 6]
+# [1, 2, 3, 4, 5, 6]
+```
 
-# Using List Comprehensions
+Using List Comprehensions
 
+```python
 [l for n in nest for l in n]
 # [1, 2, 3, 4, 5, 6]
+```
+
+Using generators
+
+```python
+from collections.abc import Iterable
+
+def flatten(items, ignore_types=(str, bytes)):
+    for x in items:
+        if isinstance(x, Iterable) and not isinstance(x, ignore_types):
+            yield from flatten(x)
+        else:
+            yield x
+            
+items = [1, 2, [3, 4, [5, 6], 7], 8]
+
+for x in flatten(items):
+    print(x) # 1 2 3 4 5 6 7 8
+
+flat = list(flatten(items))
+print(flat) # [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
 
@@ -1149,6 +1196,32 @@ def run(n, k):
 
 print(run(2, 10000))
 print(run(2, 100000))
+```
+
+
+## Decorator Measure elapsed time (@wraps is better)
+```python
+import time
+from functools import wraps
+def timethis(func):
+    @wraps(func)
+        def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(func.__name__, end-start)
+        return result
+    return wrapper
+
+@timethis
+def countdown(n):
+    '''
+        Odliczanie do zera
+    '''
+    while n > 0:
+    n -= 1
+
+countdown(100000)
 ```
 
 
@@ -1848,16 +1921,12 @@ while True:
 
 
 ## Simple TCP Client - Server
+TCP Client
 ```python
-# TCP Client
-
 import socket
 
-HOST = '127.0.0.1'
-PORT = 12345
-
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-s.connect(HOST, PORT)  
+s.connect(('127.0.0.1', 12345))  
 
 s.send(b"Hello World from Client")  
 
@@ -1867,16 +1936,12 @@ print(addr) # client PORT and HOST
 s.close()
 ```
 
+TCP Server
 ```python
-# TCP Server
-
 import socket
 
-HOST = '127.0.0.1'
-PORT = 12345
-
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-s.bind((HOST, PORT))
+s.bind(('127.0.0.1', 12345))
 s.listen(5)
 
 print("Server is running...")
