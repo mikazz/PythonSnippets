@@ -258,6 +258,25 @@ for root, subdirs, files in os.walk(walk_dir):
             print(file_content)
 ```
 
+## Recursive directory walk
+```python
+import os
+
+root_dir = "."
+skip = ("./venv")
+
+for subdir, dirs, files in os.walk(root_dir):
+    for file in files:
+        #print os.path.join(subdir, file)
+
+        filepath = subdir + os.sep + file
+        if subdir.startswith(skip):
+            continue
+
+        if filepath.endswith(".py"):
+            print(filepath)
+```
+
 
 ## Load multiple files
 ```python
