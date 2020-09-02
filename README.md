@@ -31,6 +31,14 @@ Equals in python:  i.e rq module
 # C:\Python374\lib\site-packages\rq
 ```
 
+
+## Bash kill process
+```python
+ps -fA -f | grep python
+kill -9 <pid>
+```
+
+
 ## Bash executing
 ```python
 #!/usr/bin/python3
