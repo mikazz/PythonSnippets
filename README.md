@@ -53,8 +53,8 @@ or
 
 ## Virtual environment python initialisation
 ```python
-virtualenv -p /usr/bin/python3 py3env
-source py3env/bin/activate
+virtualenv -p /usr/bin/python3 venv
+source venv/bin/activate
 pip install package-name
 ```
 
