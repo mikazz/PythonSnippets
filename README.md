@@ -59,6 +59,12 @@ pip install package-name
 ```
 
 
+## Pytest just basic info
+```python
+pytest -v --tb=no --disable-warnings test/main.py
+```
+
+
 ## Configuration file for your project app
 ```python
 import os
